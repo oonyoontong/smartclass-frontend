@@ -16,7 +16,7 @@ Vue.use(VueRouter);
 Vue.config.productionTip = false
 
 
-Vue.use(VueSocketio, 'http://localhost:5000');
+Vue.use(VueSocketio, 'https://smartclass-backend.herokuapp.com/');
 
 
 

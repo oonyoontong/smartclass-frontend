@@ -41,7 +41,7 @@ export default {
 }
 
 function pretendRequest (username, pass, cb) {
-    axios.post("http://localhost:5000/account/login",{
+    axios.post("https://smartclass-backend.herokuapp.com/account/login",{
         username: username,
         password: pass
     }).then(function(response){
