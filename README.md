@@ -1,1 +1,0 @@
-# smartclass-frontend
