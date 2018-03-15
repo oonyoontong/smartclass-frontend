@@ -156,7 +156,6 @@
 
 <style scoped>
   #route{
-    background-color: red;
     margin-top: 60px;
     margin-left: 60px;
     height: 2000px;
