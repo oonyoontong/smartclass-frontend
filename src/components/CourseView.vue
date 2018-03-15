@@ -1,4 +1,7 @@
 <template>
+  <div>
+    {{$route.params.courseID}}
+  </div>
 
 </template>
 

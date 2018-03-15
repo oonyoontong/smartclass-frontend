@@ -121,10 +121,9 @@
         </nav>
 
 
-        <div style="height:9999px">
-
-            <router-view/>
-        </div>
+        <article id="route">
+          <router-view/>
+        </article>
     </div>
 
 
@@ -156,13 +155,20 @@
 </script>
 
 <style scoped>
+  #route{
+    background-color: red;
+    margin-top: 60px;
+    margin-left: 60px;
+    height: 2000px;
+  }
 
     #top-nav{
-        background-color: #31A9C1;
-        height: fit-content;
-        width: 100%;
-        font-family: "Roboto";
-        position:fixed;
+      top:0;
+      background-color: #31A9C1;
+      height: 8%;
+      width: 100%;
+      font-family: "Roboto";
+      position:fixed;
     }
 
 
@@ -234,21 +240,20 @@
         text-align: center;
     }
 
-    .main-menu {
-        background:#212121;
-        border-right:1px solid #e5e5e5;
-        left:0;
-        top: 0;
-        height: 100%;
-        margin-top:61px;
-        width:60px;
-        overflow:hidden;
-        -webkit-transition:width .05s linear;
-        transition:width .05s linear;
-        -webkit-transform:translateZ(0) scale(1,1);
-        z-index:1000;
-        position: fixed;
-    }
+  .main-menu {
+      background:#212121;
+      border-right:1px solid #e5e5e5;
+      left:0;
+      bottom:0;
+      height: 92%;
+      width:60px;
+      overflow:hidden;
+      -webkit-transition:width .05s linear;
+      transition:width .05s linear;
+      -webkit-transform:translateZ(0) scale(1,1);
+      z-index:1000;
+      position: fixed;
+  }
 
     .main-menu>ul {
         margin:7px 0;
