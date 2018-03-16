@@ -10,7 +10,8 @@
   export default {
     name: "course-view",
     props: [
-      'lectureInput'
+      'lectureInput',
+      'courseInput'
     ],
     methods: {
       lectureQuery: function () {
@@ -30,7 +31,7 @@
 <style scoped>
 
   #course-name-div {
-    margin-top: 300px;
+    margin-top: 500px;
   }
 
 </style>

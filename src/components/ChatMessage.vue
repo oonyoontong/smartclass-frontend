@@ -12,7 +12,7 @@
             <p class="Message__Content">
                 {{ data.message }}
             </p>
-            <label>{{upvote}}</label>
+            <label>{{upvotes}}</label>
             <button v-on:click="upVote">upvote</button>
 
 
@@ -24,7 +24,7 @@
     export default {
         data(){
             return {
-                upvote: 0
+                upvotes: 0
             }
         },
         props: ['data'],
@@ -38,7 +38,7 @@
         methods:{
             upVote: function(){
                 console.log("upvaote");
-                this.$data.upvote++;
+                this.$data.upvotes++;
             }
 
         }

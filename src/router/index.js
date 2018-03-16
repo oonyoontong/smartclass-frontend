@@ -7,6 +7,7 @@ import Profile from '@/components/Profile'
 import Course from '@/components/Course'
 import Calendar from '@/components/Calendar'
 import Lecture from '@/components/views/Lecture'
+import NotFound from '@/components/404'
 import Announcement from '@/components/Announcement'
 import Dash from '@/components/Dash'
 import Quiz from '@/components/Quiz'
@@ -45,7 +46,6 @@ export default new Router({
           children: [
             {
               path: ':courseId',
-
             }
           ]
         },
@@ -116,6 +116,10 @@ export default new Router({
         auth.logout();
         next('/')
       }
+    },
+    {
+      path: '*',
+      component: NotFound
     }
   ]
 })
