@@ -8,7 +8,7 @@
 </template>
 
 <script>
-    import LiveQuestions from './LiveQuestions'
+    import LiveQuestions from '../LiveQuestionsView'
 
     export default {
         name: "lecture-view",

@@ -2,20 +2,25 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/components/Login'
 import DashBoard from '@/components/DashBoard'
-import UserProfile from '@/components/UserProfile'
-import CourseView from '@/components/CourseView'
-import LectureView from '@/components/LectureView'
+import Settings from '@/components/Settings'
+import Profile from '@/components/Profile'
+import Course from '@/components/Course'
+import Calendar from '@/components/Calendar'
+import Lecture from '@/components/views/Lecture'
+import Announcement from '@/components/Announcement'
+import Dash from '@/components/Dash'
+import Quiz from '@/components/Quiz'
 import auth from '../scripts/auth'
 
-Vue.use(Router)
+Vue.use(Router);
 
-function requireAuth (to, from, next) {
+function requireAuth(to, from, next) {
   console.log(auth.loggedIn());
+  console.log("Checking logged in status... " + auth.loggedIn());
   if (!auth.loggedIn()) {
-    console.log('going login');
+    console.log('Redirecting to login.');
     next({
-      path: '/login',
-      query: {redirect:to.fullPath}
+      path: '/login'
     })
   } else {
     next()
@@ -25,47 +30,89 @@ function requireAuth (to, from, next) {
 export default new Router({
   mode: 'history',
   routes: [
-    {path: '/', redirect: '/login'},
-    { path: '/login', component: Login ,beforeEnter(to,from,next){
-        console.log("checking for existing cookies");
-        if (auth.loggedIn()){
-          next({path: '/dashboard'});
-        } else {
-          next();
-        }
-      } },
-
     {
-      path: '/dashboard',
-      component: DashBoard,
+      path: '/',
+      component: Dash,
       beforeEnter: requireAuth,
       children: [
         {
-          path: 'profile',
-          component: UserProfile
+          path: '/announcements',
+          component: Announcement
         },
         {
-          path:'/',
-          redirect:'courses/all'
-
-        },
-        {
-          path:'courses/:courseID',
-          component: CourseView,
-          /*props: (route) => ({ query: route.query.q }),*/
-          children:[
+          path: '/courses',
+          component: Course,
+          children: [
             {
-              path:'lecture/:lectureID',
-              component: LectureView
-              /*props: (route) => ({ query: route.query.q })*/
+              path: ':courseId',
+
             }
           ]
-        }
+        },
+        {
+          path: '/settings',
+          component: Settings
+        },
+        {
+          path: '/settings/profile',
+          component: Profile
+        },
+        {
+          path: '/quiz',
+          component: Quiz
+        },
+        {
+          path: '/stats',
+          component: DashBoard
+        },
+        {
+          path: '/calendar',
+          component: Calendar
+        },
       ]
     },
-    {   name: 'logout',
+    {
+      path: '/login',
+      component: Login,
+      beforeEnter(to, from, next) {
+        console.log("Checking logged in status... " + auth.loggedIn());
+        if (auth.loggedIn()) {
+          next('/')
+        } else {
+          next();
+        }
+      }
+    },
+    // {
+    //   path: '/dashboard',
+    //   component: DashBoard,
+    //   beforeEnter: requireAuth,
+    //   children: [
+    //     {
+    //       path: '/',
+    //       redirect: 'courses/all'
+    //     },
+    //     {
+    //       path: 'courses',
+    //       redirect: 'courses/all'
+    //     },
+    //     {
+    //       path: 'courses/:courseID',
+    //       component: Course,
+    //       /*props: (route) => ({ query: route.query.q }),*/
+    //       children: [
+    //         {
+    //           path: 'lecture/:lectureID',
+    //           component: Lecture
+    //           /*props: (route) => ({ query: route.query.q })*/
+    //         }
+    //       ]
+    //     }
+    //   ]
+    // },
+    {
       path: '/logout',
-      beforeEnter (to, from, next) {
+      beforeEnter(to, from, next) {
         auth.logout();
         next('/')
       }

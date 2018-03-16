@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-
-
 function LoginRequest (username, pass, cb) {
   axios.post("https://smartclass-backend.herokuapp.com/account/login",{
     username: username,
@@ -45,7 +43,8 @@ export default {
   },
 
   loggedIn () {
-    return !(localStorage.token == null);
+    // TODO: Check local token against token stored on server
+    return localStorage.token != null;
   },
 
   onChange () {}
