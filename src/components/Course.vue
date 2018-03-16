@@ -1,6 +1,12 @@
 <template>
-  <div id="course-name-div">
-    {{$route.params.courseID}}
+  <div id="courses">
+    <h1>
+      Courses
+    </h1>
+    <p>
+    Course ID: {{$route.params.courseId}}
+    </p>
+
   </div>
 </template>
 
@@ -29,9 +35,5 @@
 </script>
 
 <style scoped>
-
-  #course-name-div {
-    margin-top: 500px;
-  }
 
 </style>

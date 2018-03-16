@@ -1,5 +1,9 @@
 <template>
-  <div id="dashboard"></div>
+  <div id="dashboard">
+    <h1>
+      Statistacs.
+    </h1>
+  </div>
 </template>
 
 <script>
@@ -9,7 +13,5 @@
 </script>
 
 <style scoped>
-  #dashboard {
-    background: cornflowerblue;
-  }
+
 </style>

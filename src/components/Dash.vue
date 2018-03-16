@@ -25,9 +25,10 @@
 
 <style scoped>
   #content-wrapper {
-    margin-top: 60px;
-    margin-left: 60px;
-    height: 2000px;
+    position: relative;
+    margin-top: 77px;
+    margin-left: 19px;
+    height: 100%;
   }
 
   @font-face {
