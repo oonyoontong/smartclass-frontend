@@ -91,17 +91,24 @@
   import axios from 'axios';
 
   export default {
+    methods: {
+      getCourseList () {
+        var courses = axios.get("https://smartclass-backend.herokuapp.com/course/")
+          .then(function (response) {
+            var courses = response.data;
+            console.log(courses);
+            for (var i = 0; i < courses.length; i++) {
+              console.log(courses[i].courseName);
+              createElement('li');
+            }
+          });
+      }
+    },
     name: 'SidebarMenu',
-    beforeCreate: function () {
-      var courses = axios.get("https://smartclass-backend.herokuapp.com/course")
-        .then(function (response) {
-          var courses = response.data[0];
-          for (var i = 0; i < courses.length; i++) {
-            console.log(courses[i]['courseName']);
-            createElement('li');
-          }
-        });
-    }
+    props:{
+
+    },
+    beforeCreate: this.getCourseList
   }
 </script>
 

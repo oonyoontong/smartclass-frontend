@@ -18,8 +18,8 @@
                 </span>
                 <datepicker :readonly="true" format="MMM/D/YYYY" id="dateInput" width="100%"></datepicker>
               </div>
-              <br />
-              <br />
+              <br/>
+              <br/>
 
               <!-- with characthers -->
               <div class="input-group">
@@ -28,7 +28,7 @@
                 </span>
                 <input class="form-control" placeholder="Username" type="text">
               </div>
-              <br />
+              <br/>
               <div class="input-group">
                 <span class="input-group-addon">
                   <i class="fa fa-fw fa-usd" aria-hidden="true"></i>
@@ -36,7 +36,7 @@
                 <input class="form-control" type="text">
                 <span class="input-group-addon">.00</span>
               </div>
-              <br />
+              <br/>
 
               <!-- with icons from font awesome -->
               <h4>With icons</h4>
@@ -44,7 +44,7 @@
                 <span class="input-group-addon"><i class="fa fa-fw fa-envelope"></i></span>
                 <input class="form-control" placeholder="Email" type="email">
               </div>
-              <br />
+              <br/>
               <div class="input-group">
                 <input class="form-control" type="text">
                 <span class="input-group-addon"><i class="fa fa-fw fa-check"></i></span>
@@ -54,13 +54,15 @@
               <!-- Success/Error heads up input -->
               <h4>With border indicator</h4>
               <div class="form-group has-success">
-                <label class="control-label" for="inputSuccess"><i class="fa fa-fw fa-check"></i> Input with success</label>
+                <label class="control-label" for="inputSuccess"><i class="fa fa-fw fa-check"></i> Input with
+                  success</label>
                 <input class="form-control" id="inputSuccess" placeholder="Enter ..." type="text">
                 <span class="help-block">Help block with success</span>
               </div>
-              <br />
+              <br/>
               <div class="form-group has-error">
-                <label class="control-label" for="inputError"><i class="fa fa-fw fa-times-circle-o"></i> Input with error</label>
+                <label class="control-label" for="inputError"><i class="fa fa-fw fa-times-circle-o"></i> Input with
+                  error</label>
                 <input class="form-control" id="inputError" placeholder="Enter ..." type="text">
                 <span class="help-block">Help block with error</span>
               </div>
@@ -77,7 +79,7 @@
                   <option>option 5</option>
                 </select>
               </div>
-              <br />
+              <br/>
               <div class="form-group">
                 <label>Select Multiple</label>
                 <select multiple="" class="form-control">
@@ -104,14 +106,14 @@
 
   export default {
     name: 'Settings',
-    components: { datepicker },
+    components: {datepicker},
     computed: {
-      datetime () {
+      datetime() {
         return new Date()
       }
     },
     methods: {
-      clearInput (vueModel) {
+      clearInput(vueModel) {
         vueModel = ''
       }
     }
@@ -121,5 +123,10 @@
 <style>
   .datetime-picker input {
     height: 4em !important;
+  }
+
+  .content {
+    padding-left: 50px;
+    position: relative;
   }
 </style>
