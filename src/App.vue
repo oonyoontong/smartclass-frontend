@@ -13,7 +13,7 @@ export default {
 <style>
   #app {
   @import url(https://fonts.googleapis.com/css?family=Roboto+Mono&subset=cyrillic);
-    font-family: 'Roboto';
+    font-family: 'Roboto', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;

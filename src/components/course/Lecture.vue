@@ -2,19 +2,12 @@
 <template>
     <div>
         <h1>LECTURE VIEW</h1>
-
-        <livequestions></livequestions>
     </div>
 </template>
 
 <script>
-    import LiveQuestions from '../LiveQuestionsView'
-
     export default {
         name: "lecture-view",
-        components: {
-            livequestions: LiveQuestions
-        },
         mounted: function(){
             setTimeout(20000)
         }

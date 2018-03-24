@@ -2,7 +2,7 @@
   <div id="ChatBox">
     <div class="col-s-2">
       <div class="ChatBox__List">
-        <chat-message v-for="message in messages" :data="message"/>
+        <chat-message v-for="message in messages" v-bind:data="message"></chat-message>
       </div>
 
       <div class="ChatBox__Input">
@@ -18,7 +18,6 @@
   import ChatMessage from './ChatMessage.vue'
 
   export default {
-
     components: {ChatMessage},
     data() {
       return {
@@ -28,7 +27,6 @@
       }
     },
     sockets: {
-
       'message received': function (message) {
         console.log("message received " + message);
         this.$data.messages.push(message)
@@ -57,7 +55,7 @@
       }
     },
     computed: {
-      // Surely there must be a better way to do this? @TODO
+      // TODO: Surely there must be a better way to do this?
       isAdmin() {
         return this.$isAdmin
       }

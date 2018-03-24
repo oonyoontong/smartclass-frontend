@@ -1,32 +1,19 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Login from '@/components/Login'
-import DashBoard from '@/components/DashBoard'
-import Settings from '@/components/Settings'
-import Profile from '@/components/Profile'
-import Course from '@/components/Course'
-import Calendar from '@/components/Calendar'
-import Lecture from '@/components/views/Lecture'
-import NotFound from '@/components/404'
-import Announcement from '@/components/Announcement'
-import Dash from '@/components/Dash'
-import Quiz from '@/components/Quiz'
 import auth from '../scripts/auth'
+import Login from '@/components/Login'
+import Dash from '@/components/main/Dash'
+import Course from '@/components/course/Course'
+import Lecture from '@/components/course/Lecture'
+import Quiz from '@/components/Quiz'
+import Announcement from '@/components/Announcement'
+import Calendar from '@/components/Calendar'
+import Statistics from '@/components/Statistics'
+import Settings from '@/components/settings/Settings'
+import Profile from '@/components/settings/Profile'
+import NotFound from '@/components/404'
 
-Vue.use(Router);
-
-function requireAuth(to, from, next) {
-  console.log(auth.loggedIn());
-  console.log("Checking logged in status... " + auth.loggedIn());
-  if (!auth.loggedIn()) {
-    console.log('Redirecting to login.');
-    next({
-      path: '/login'
-    })
-  } else {
-    next()
-  }
-}
+Vue.use(Router)
 
 export default new Router({
   mode: 'history',
@@ -35,6 +22,7 @@ export default new Router({
       path: '/',
       component: Dash,
       beforeEnter: requireAuth,
+      beforeRouteUpdate: requireAuth,
       children: [
         {
           path: '/announcements',
@@ -45,17 +33,19 @@ export default new Router({
           component: Course,
           children: [
             {
-              path: ':courseId',
+              path: ':courseId'
             }
           ]
         },
         {
           path: '/settings',
-          component: Settings
-        },
-        {
-          path: '/settings/profile',
-          component: Profile
+          component: Settings,
+          children: [
+            {
+              path: 'profile',
+              component: Profile
+            }
+          ]
         },
         {
           path: '/quiz',
@@ -63,58 +53,33 @@ export default new Router({
         },
         {
           path: '/stats',
-          component: DashBoard
+          component: Statistics
         },
         {
           path: '/calendar',
           component: Calendar
-        },
+        }
       ]
     },
     {
       path: '/login',
       component: Login,
       beforeEnter(to, from, next) {
-        console.log("Checking logged in status... " + auth.loggedIn());
+        console.log("Checking logged in status... " + auth.loggedIn())
         if (auth.loggedIn()) {
           next('/')
         } else {
-          next();
+          next()
         }
       }
     },
-    // {
-    //   path: '/dashboard',
-    //   component: DashBoard,
-    //   beforeEnter: requireAuth,
-    //   children: [
-    //     {
-    //       path: '/',
-    //       redirect: 'courses/all'
-    //     },
-    //     {
-    //       path: 'courses',
-    //       redirect: 'courses/all'
-    //     },
-    //     {
-    //       path: 'courses/:courseID',
-    //       component: Course,
-    //       /*props: (route) => ({ query: route.query.q }),*/
-    //       children: [
-    //         {
-    //           path: 'lecture/:lectureID',
-    //           component: Lecture
-    //           /*props: (route) => ({ query: route.query.q })*/
-    //         }
-    //       ]
-    //     }
-    //   ]
-    // },
     {
       path: '/logout',
       beforeEnter(to, from, next) {
-        auth.logout();
-        next('/')
+        if (auth.loggedIn()) {
+          auth.logout()
+          next('/')
+        }
       }
     },
     {
@@ -123,3 +88,13 @@ export default new Router({
     }
   ]
 })
+
+function requireAuth(to, from, next) {
+  console.log("Checking logged in status... " + auth.loggedIn())
+  if (!auth.loggedIn()) {
+    console.log('Redirecting to login.')
+    next({path: '/login'})
+  } else {
+    next()
+  }
+}

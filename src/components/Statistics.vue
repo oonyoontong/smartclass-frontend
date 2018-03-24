@@ -1,7 +1,7 @@
 <template>
   <div id="dashboard">
     <h1>
-      Statistacs.
+      Statistics
     </h1>
   </div>
 </template>

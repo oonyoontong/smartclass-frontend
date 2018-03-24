@@ -106,7 +106,6 @@
     },
     name: 'SidebarMenu',
     props:{
-
     },
     beforeCreate: this.getCourseList
   }

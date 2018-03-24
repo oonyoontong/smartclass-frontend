@@ -5,7 +5,7 @@
   "author": "Oon Tong",
   "private": true,
   "scripts": {
-    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
+    "dev": "webpack-dev-server --inline --open --config build/webpack.dev.conf.js",
     "start": "npm run dev",
     "build": "node build/build.js",
     "postinstall": "npm install express"
@@ -13,7 +13,6 @@
   "dependencies": {
     "axios": "^0.18.0",
     "express": "^4.16.3",
-    "moment": "^2.21.0",
     "serve-static": "^1.13.2",
     "vue": "^2.5.2",
     "vue-date-picker": "^1.0.2",

@@ -9,7 +9,7 @@
         <p v-if="error" class="alert alert-danger alert-dismissible fade show">Invalid username or password!</p>
         <input v-model="username" class="form-control" placeholder="Username">
         <input v-model="password" class="form-control" placeholder="Password" type="password"> <br>
-        <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+        <button class="btn btn-primary btn-block">Sign In</button>
       </form>
     </div>
   </div>
@@ -30,14 +30,12 @@
 
     methods: {
       login() {
-        console.log('attempting login');
         auth.login(this.username, this.password, loggedIn => {
-          console.log("finished checking");
           if (!loggedIn) {
             console.log("error");
             this.error = true;
           } else {
-            console.log("attempting to route to dashboard");
+            console.log("routing to dashboard");
             this.$router.push('/');
           }
         })

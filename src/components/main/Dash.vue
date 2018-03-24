@@ -1,17 +1,16 @@
 <template>
-  <div class="dashboard_page">
+  <div class="dashboard-page">
     <headerbar/>
     <sidebar/>
     <div id="content-wrapper">
       <router-view/>
     </div>
   </div>
-
 </template>
 
 <script>
-  import Sidebar from './Sidebar'
-  import Headerbar from './Headerbar'
+  import Sidebar from './bars/Sidebar'
+  import Headerbar from './bars/Headerbar'
 
   export default {
     name: "Dash",
