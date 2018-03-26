@@ -22,11 +22,10 @@ export default new Router({
       path: '/',
       component: Dash,
       beforeEnter: requireAuth,
-      beforeRouteUpdate: requireAuth,
       children: [
         {
-          path: '/announcements',
-          component: Announcement
+          path: '/',
+          component: Course
         },
         {
           path: '/courses',
@@ -38,6 +37,25 @@ export default new Router({
           ]
         },
         {
+          path: '/quiz',
+          component: Quiz
+        },
+        {
+          path: '/announcements',
+          component: Announcement
+        },
+        {
+          path: '/stats',
+          components:{
+            default: Statistics,
+            rightbar: Announcement
+          }
+        },
+        {
+          path: '/calendar',
+          component: Calendar
+        },
+        {
           path: '/settings',
           component: Settings,
           children: [
@@ -46,18 +64,6 @@ export default new Router({
               component: Profile
             }
           ]
-        },
-        {
-          path: '/quiz',
-          component: Quiz
-        },
-        {
-          path: '/stats',
-          component: Statistics
-        },
-        {
-          path: '/calendar',
-          component: Calendar
         }
       ]
     },

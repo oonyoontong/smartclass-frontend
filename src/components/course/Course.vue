@@ -1,12 +1,11 @@
-<template>
+<template xmlns:v-if="http://www.w3.org/1999/xhtml">
   <div id="courses">
     <h1>
       Courses
     </h1>
-    <p>
+    <span v-if="$route.params.courseId">
     Course ID: {{$route.params.courseId}}
-    </p>
-
+    </span>
   </div>
 </template>
 

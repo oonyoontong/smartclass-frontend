@@ -4,15 +4,12 @@
       <li class="content-header">
         <h1>Announcements</h1>
       </li>
-
       <li class="content-body">
         <span>Body</span>
       </li>
-
       <li class="content-summary">
         <span>Summary</span>
       </li>
-
       <li class="content-footer">
         <span>Footer</span>
       </li>
@@ -28,7 +25,6 @@
 
 <style scoped>
   #announcements{
-    height: 1000px;
   }
 
   #announcements ul {

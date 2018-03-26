@@ -83,7 +83,6 @@
         </router-link>
       </li>
     </ul>
-
   </nav>
 </template>
 
@@ -92,7 +91,7 @@
 
   export default {
     methods: {
-      getCourseList () {
+      getCourseList() {
         var courses = axios.get("https://smartclass-backend.herokuapp.com/course/")
           .then(function (response) {
             var courses = response.data;
@@ -105,8 +104,7 @@
       }
     },
     name: 'SidebarMenu',
-    props:{
-    },
+    props: {},
     beforeCreate: this.getCourseList
   }
 </script>
@@ -181,9 +179,9 @@
     left: 0;
     bottom: 0;
     height: 92%;
-    width: 60px;
+    width: 4%;
     overflow: hidden;
-    -webkit-transition: width .05s linear;
+    -webkit-transition: width 0.05s linear;
     transition: width .05s linear;
     -webkit-transform: translateZ(0) scale(1, 1);
     z-index: 1000;

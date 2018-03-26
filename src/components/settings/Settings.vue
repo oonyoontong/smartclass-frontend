@@ -3,7 +3,7 @@
     <div id="settings-bar">
       <settings-bar/>
     </div>
-    <div id="content-wrapper">
+    <div id="main-content-wrapper">
       <router-view/>
     </div>
   </div>

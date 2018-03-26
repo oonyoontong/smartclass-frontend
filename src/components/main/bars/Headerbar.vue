@@ -1,5 +1,5 @@
 <template>
-  <header class="navbar navbar-fixed-top navbar-expand-lg navbar-light navbar-fixed-top " id="top-nav">
+  <header class="navbar navbar-fixed-top navbar-expand-lg navbar-light navbar-fixed-top" id="top-nav">
     <div class="container-fluid">
       <router-link to='/' class="navbar-brand">
         <img src="../../../assets/app-icon.png" height="35" width="35">
@@ -37,11 +37,7 @@
 
 <style scoped>
   #top-nav {
-    top: 0;
-    background-color: #31A9C1;
-    height: 8%;
-    width: 100%;
+    background: #31A9C1;
     font-family: "Roboto", sans-serif;
-    position: fixed;
   }
 </style>
