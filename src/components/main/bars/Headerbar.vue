@@ -1,12 +1,12 @@
 <template>
   <header class="navbar navbar-fixed-top navbar-expand-lg navbar-light navbar-fixed-top" id="top-nav">
     <div class="container-fluid">
-      <router-link to='/' class="navbar-brand">
-        <img src="../../../assets/app-icon.png" height="35" width="35">
+      <router-link to='/' class="navbar-brand" id="logo-container">
+        <img src="../../../assets/app-icon.png" height="35" width="35" id="logo-main">
         <span class="hover" style="padding-left: 10px; color: #fff;">SmartClass</span>
       </router-link>
       <a href="/" v-on:click="redirectLogout" class="navbar-brand">
-        <img src="../../../assets/logout-icon.png" height="25" width="25">
+        <i class="fas fa-power-off fa-lg" id="logout-icon" title="Logout"></i>
       </a>
     </div>
   </header>
@@ -37,7 +37,25 @@
 
 <style scoped>
   #top-nav {
-    background: #31A9C1;
+    background: #212121;
     font-family: "Roboto", sans-serif;
+  }
+
+  #logo-container {
+    filter: brightness(0) invert(.5);
+    transition: filter 0.25s ease-in-out;
+  }
+
+  #logo-container:hover {
+    filter: brightness(0) invert(.7);
+  }
+
+  #logout-icon {
+    filter: brightness(0) invert(.6);
+    transition: filter 0.25s ease-in-out;
+  }
+
+  #logout-icon:hover {
+    filter: brightness(0) invert(.9);
   }
 </style>

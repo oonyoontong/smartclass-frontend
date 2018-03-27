@@ -7,39 +7,30 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
   strict: true,
   state: {
-    products: [
-      {name: 'Banana Peel', price: 20},
-      {name: 'Shiny Star', price: 40},
-      {name: 'Green Shell', price: 60},
-      {name: 'Blue Shell', price: 80}
-    ],
-    isPlatformMobile: false
+    isPlatformMobile: false,
+    username: null,
+    registeredCourses: []
   },
   getters: {
-    saleProducts: state => {
-      return state.products.map(product => {
-        return {
-          name: '**' + product.name + '**',
-          price: product.price / 2
-        }
-      })
-    },
-    products: state => {
-      return state.products
-    }
   },
   mutations: {
-    reducePrice: (state, payload) => {
-      state.products.forEach(product => {
-        product.price -= payload
-      })
+    fetchRegisteredCourses: (state, courseList) => {
+      state.registeredCourses = courseList
     }
   },
   actions: {
-    reducePrice: (context, payload) => {
-      setTimeout(function () {
-        context.commit('reducePrice', payload)
-      }, 2000)
+    getRegisteredCourses: ({commit}) => {
+      // axios.get("https://smartclass-backend.herokuapp.com/course/").then(response => {
+      axios.get("https://jsonplaceholder.typicode.com/users").then(response => {
+        const courses = response.data.map(item => {
+          return item.name
+        });
+        commit('fetchRegisteredCourses', courses);
+        console.log(courses)
+        // for (var i = 0; i < courses.length; i++) {
+        //   console.log(courses[i].courseName);
+        // }
+      });
     }
   }
 })

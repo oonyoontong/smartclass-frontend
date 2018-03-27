@@ -25,21 +25,6 @@
 
 <style scoped>
   #announcements{
-  }
-
-  #announcements ul {
-    display: table;
-    table-layout: fixed;
-    width: 100%;
-    height: 100%;
-    border: 1px solid #c2c2c2;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-  }
-
-  #announcements ul li {
-    text-align: center;
-    display: table-row;
     background: cornflowerblue;
   }
 
