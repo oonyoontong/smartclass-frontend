@@ -10,9 +10,9 @@
         </router-link>
         <ul class="dropdown-menu" id="course-list" role="menu">
           <!-- TODO: Create course links programmatically -->
-          <li v-for="name in $store.state.registeredCourses">
-            <router-link to="/courses/50.003">
-              <span class="nav-text">{{name}}</span>
+          <li v-for="course in $store.state.registeredCourses">
+            <router-link :to="'/courses/' + course.courseId">
+              <span class="nav-text">{{course.courseName}}</span>
             </router-link>
           </li>
         </ul>
@@ -71,11 +71,6 @@
           </span>
         </router-link>
       </li>
-      <li>
-        <button v-on:click="$store.dispatch('getRegisteredCourses')">
-          Get Courses
-        </button>
-      </li>
     </ul>
   </nav>
 </template>
@@ -88,7 +83,9 @@
     },
     name: 'Sidebar',
     props: {},
-    // beforeCreate: this.$store.dispatch('getRegisteredCourses')
+    beforeCreate() {
+      this.$store.dispatch('getRegisteredCourses')
+    }
   }
 </script>
 

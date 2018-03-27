@@ -12,6 +12,9 @@ export const store = new Vuex.Store({
     registeredCourses: []
   },
   getters: {
+    courseNameFromId(state, courseId){
+      return state.registeredCourses.filter(item => item.courseId === courseId)[0]
+    }
   },
   mutations: {
     fetchRegisteredCourses: (state, courseList) => {
@@ -20,16 +23,11 @@ export const store = new Vuex.Store({
   },
   actions: {
     getRegisteredCourses: ({commit}) => {
-      // axios.get("https://smartclass-backend.herokuapp.com/course/").then(response => {
-      axios.get("https://jsonplaceholder.typicode.com/users").then(response => {
-        const courses = response.data.map(item => {
-          return item.name
-        });
+      axios.get("https://smartclass-backend.herokuapp.com/course/").then(response => {
+      // axios.get("https://jsonplaceholder.typicode.com/users").then(response => {
+        const courses = response.data;
         commit('fetchRegisteredCourses', courses);
         console.log(courses)
-        // for (var i = 0; i < courses.length; i++) {
-        //   console.log(courses[i].courseName);
-        // }
       });
     }
   }
