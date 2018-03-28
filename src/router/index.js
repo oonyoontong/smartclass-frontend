@@ -4,7 +4,7 @@ import auth from '../scripts/auth'
 import Login from '@/components/Login'
 import Dash from '@/components/main/Dash'
 import Course from '@/components/course/Course'
-import Lecture from '@/components/course/Lecture'
+import Lecture from '@/components/course/LecturePreview'
 import Quiz from '@/components/Quiz'
 import Announcement from '@/components/Announcement'
 import Calendar from '@/components/Calendar'
@@ -28,13 +28,9 @@ export default new Router({
           component: Course
         },
         {
-          path: '/courses',
+          path: '/courses/:courseId',
           component: Course,
-          children: [
-            {
-              path: ':courseId'
-            }
-          ]
+          props: true
         },
         {
           path: '/quiz',

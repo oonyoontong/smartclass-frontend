@@ -83,9 +83,6 @@
     },
     name: 'Sidebar',
     props: {},
-    beforeCreate() {
-      this.$store.dispatch('getRegisteredCourses')
-    }
   }
 </script>
 
@@ -116,6 +113,10 @@
     display: block;
     transition: all .2s ease-in-out;
     width: 250px;
+  }
+
+  .sidebar-nav li a {
+    transition: all .2s ease-in-out;
   }
 
   .sidebar-nav li > a {
