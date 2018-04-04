@@ -20,7 +20,6 @@
     ],
     methods: {
       lectureQuery: function () {
-        console.log("wtfwtf");
         this.$router.replace({
             path: 'lecture',
             query: {
