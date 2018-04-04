@@ -2,10 +2,12 @@
   <div id="courses">
     <div id="courses-content">
       <ul class="lecture-preview-container">
-        <li v-for="lecture in $store.state.course.visibleLectures" class="lecture-preview-item">
-          <lecture :lectureInfo=lecture></lecture>
+        <li v-for="preview in $store.state.course.visiblePreviews" class="lecture-preview-item">
+          <lecture :previewInfo=preview :courseId="courseId"></lecture>
         </li>
       </ul>
+      <button v-on:click.prevent="updateLectures">Fetch lectures</button>
+      <span>TODO: Move method from button to hook</span>
     </div>
     <h1 v-if="courseId">Course id: {{courseId}}</h1>
   </div>
@@ -13,7 +15,7 @@
 
 <script>
   //TODO: PULL LECTURES FROM SERVER, SORT BY QUERY
-  import LecturePreview from './LecturePreview'
+  import LecturePreview from './CourseItemPreview'
 
   export default {
     name: "course-view",
@@ -24,17 +26,12 @@
       'courseId'
     ],
     created(){
-      this.$store.dispatch('visibleLectures', '50004')
+      // TODO: dispatch after registeredCourses has resolved
+      // this.$store.dispatch('visiblePreviews', this.courseId)
     },
     methods: {
-      lectureQuery: function () {
-        this.$router.replace({
-            path: 'lecture',
-            query: {
-              q: this.lectureInput
-            }
-          }
-        )
+      updateLectures: function(){
+        this.$store.dispatch('visiblePreviews', this.courseId)
       }
     }
   }

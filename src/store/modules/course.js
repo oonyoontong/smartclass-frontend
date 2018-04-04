@@ -6,8 +6,9 @@ axios.interceptors.request.use(request => {
 })
 
 const state = {
+  defaultPreviewImageUrl: "http://www.raisedeyebrow.com/sites/www.raisedeyebrow.com/files/blog/2012/01/fff.png",
   registeredCourses: [],
-  visibleLectures: [
+  visiblePreviews: [
     {
       id: 1,
       name: "introduction",
@@ -33,11 +34,11 @@ const getters = {
 }
 
 const mutations = {
-  registeredCourses: (state, courseList) => {
-    state.registeredCourses = courseList
+  registeredCourses: (state, payload) => {
+    state.registeredCourses = payload
   },
-  visibleLectures: (state, visibleLectures) => {
-    state.visibleLectures = visibleLectures
+  visiblePreviews: (state, payload) => {
+    state.visiblePreviews = payload
   }
 }
 
@@ -46,19 +47,35 @@ const actions = {
     // axios.get("https://jsonplaceholder.typicode.com/users").then(response => {
     axios.get(rootState.backendUrl + 'course')
       .then(response => {
-      const courses = response.data
-      commit('registeredCourses', courses)
-      console.log("Fetched " + courses.length + " courses:", courses)
-    })
+        const courses = response.data
+        commit('registeredCourses', courses)
+        console.log("Fetched " + courses.length + " courses:", courses)
+      })
       .catch(error => {
         console.log(error.response)
       })
   },
-  visibleLectures: ({commit, state}, courseId) => {
-    const lectureIds = state.registeredCourses.filter(
-      course => course.courseId === courseId)
-    console.log('Filtered course: ', lectureIds)
-    commit('visibleLectures', lectureIds)
+  visiblePreviews: ({commit, state, rootState}, courseId) => {
+    const id = state.registeredCourses.find(item => {
+      if (item.courseId === courseId) return item._id
+    })
+    axios.post(rootState.backendUrl + 'lecture', {
+        'courseId': id
+      })
+      .then(response => {
+        const lectures = response.data.lectures
+        lectures.forEach(item => {
+          item.name = item.lectureName
+          delete item.lectureName
+
+          if(!item.previewImageUrl) item.previewImageUrl = state.defaultPreviewImageUrl
+
+          return item
+        })
+        console.log('Fetched ' + lectures.length + ' lectures: ', response.data)
+        commit('visiblePreviews', lectures)
+      })
+    //
   }
 }
 

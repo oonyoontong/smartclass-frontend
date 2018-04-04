@@ -1,5 +1,4 @@
 export default {
-  isPlatformMobile: false,
-  username: null,
-  registeredCourses: []
+  backendUrl: "https://smartclass-backend.herokuapp.com/",
+  isPlatformMobile: false
 }

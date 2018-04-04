@@ -13,10 +13,7 @@
     },
     props: [
       'quizId'
-    ],
-    beforeCreate(){
-      this.$store.dispatch('visibleLectures')
-    }
+    ]
   }
 </script>
 
