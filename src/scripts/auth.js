@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {store} from '../store/index'
 
 export default {
   login(username, pass, cb) {
@@ -6,6 +7,7 @@ export default {
     cb = arguments[arguments.length - 1];
     LoginRequest(username, pass, (res) => {
       if (res.authenticated) {
+        console.log('Authenticated: ' + res.authenticated)
         localStorage.token = res.token;
         if (cb) cb(true)
         this.onChange(true)
@@ -21,6 +23,7 @@ export default {
   },
 
   logout(cb) {
+    localStorage.token = null
     delete localStorage.token
     if (cb) cb()
     this.onChange(false)
@@ -36,10 +39,12 @@ export default {
 }
 
 function LoginRequest(username, pass, cb) {
-  axios.post("https://smartclass-backend.herokuapp.com/account/login", {
-    username: username,
-    password: pass
-  }).then(function (response) {
+  axios.post(
+    store.state.backendUrl + "account/login",
+    {
+      username: username,
+      password: pass
+    }).then(function (response) {
     console.log(response.data);
     cb(response.data);
   })

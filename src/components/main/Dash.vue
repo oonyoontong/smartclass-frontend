@@ -23,6 +23,9 @@
       Headerbar,
       Sidebar,
       Rightbar
+    },
+    beforeCreate() {
+      this.$store.dispatch('registeredCourses')
     }
   }
 </script>
