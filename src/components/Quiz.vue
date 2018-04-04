@@ -1,22 +1,21 @@
 <template>
   <div id="dashboard">
-    <h1>
-      Quiz
+    <h1 v-if="quizId">
+      Quiz id: {{quizId}}
     </h1>
-    <product-list-one/>
-    <product-list-two/>
   </div>
 </template>
 
 <script>
-  import ProductListOne from '@/components/ProductListOne'
-  import ProductListTwo from '@/components/ProductListTwo'
-
   export default {
     name: "quiz-view",
     components: {
-      'product-list-one': ProductListOne,
-      'product-list-two': ProductListTwo
+    },
+    props: [
+      'quizId'
+    ],
+    beforeCreate(){
+      this.$store.dispatch('visibleLectures')
     }
   }
 </script>
