@@ -2,7 +2,7 @@
   <div id="courses">
     <div id="courses-content">
       <ul class="lecture-preview-container">
-        <li v-for="lecture in $store.state.visibleLectures" class="lecture-preview-item">
+        <li v-for="lecture in $store.state.course.visibleLectures" class="lecture-preview-item">
           <lecture :lectureInfo=lecture></lecture>
         </li>
       </ul>
@@ -25,9 +25,11 @@
     beforeUpdate() {
       this.$store.dispatch('updateVisibleLectures', this.props)
     },
+    beforeCreate() {
+      console.log(this.$store.state.course.visibleLectures)
+    },
     methods: {
       lectureQuery: function () {
-        console.log("wtfwtf");
         this.$router.replace({
             path: 'lecture',
             query: {
@@ -42,16 +44,23 @@
 
 <style scoped>
   #courses {
+    margin:  50px;
   }
 
   .lecture-preview-container {
+    margin: 0;
+    padding: 0;
     display: flex;
     flex-direction: row;
-
+    list-style: none;
+    flex-flow: wrap;
+    align-content: space-around;
   }
 
-  .lecture-preview-container > li {
-    display: block;
+  .lecture-preview-item {
+    margin-right: 60px;
+    margin-bottom: 60px;
+    box-shadow: 3px 5px 3px 0 #EEEEEE;
   }
 
 </style>

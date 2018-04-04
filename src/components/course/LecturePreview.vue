@@ -1,12 +1,14 @@
 <template>
-  <div id="lecture-preview-container">
-    <div id="lecture-preview-image">
-      <i class="fas fa-camera fa-6x"></i>
-    </div>
-    <div id="lecture-preview-name">
-      <h1>Lecture: {{lectureInfo.name}}</h1>
-    </div>
-  </div>
+  <router-link to="/">
+    <section id="lecture-preview-container">
+      <div id="lecture-preview-image">
+        <img :src=lectureInfo.previewImageUrl />
+      </div>
+      <div id="lecture-preview-text">
+        <span id="lecture-name">{{lectureInfo.name}}</span>
+      </div>
+    </section>
+  </router-link>
 </template>
 
 <script>
@@ -14,19 +16,46 @@
     name: "lecture-view",
     props: [
       'lectureInfo'
-    ]
+    ],
   }
 </script>
 
 <style scoped>
   #lecture-preview-container {
-    display: flex;
-    flex-direction: column;
-    background: lightgray;
-    margin: 5px;
-    padding: 0;
+    display: grid;
+    grid-template-areas:
+      "image"
+      "text";
+    grid-template-rows: 75% 25%;
     width: 200px;
     height: 200px;
-    box-shadow: 5px 5px 5px 0 #EEEEEE;
+    border: solid 1px #DDD;
+    user-select: none;
+  }
+
+  #lecture-preview-image {
+    grid-area: image;
+    overflow: hidden;
+    -webkit-box-shadow: inset 0 -2px 8px #DDDDDD;
+    -moz-box-shadow: inset 0 -2px 8px #DDDDDD;
+    box-shadow: inset 0 -2px 8px #DDDDDD;
+  }
+
+  #lecture-preview-text {
+    grid-area: text;
+    position: relative;
+    text-align: left;
+    font-size: 1em;
+    border-top: solid 2px #888;
+    color: #555;
+  }
+
+  #lecture-preview-text > #lecture-name {
+    display: block;
+    padding: 2px 5px;
+    line-height: 1em;
+    position: absolute;
+    top: 0;
+    left: 0;
   }
 </style>

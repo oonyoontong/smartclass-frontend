@@ -10,7 +10,7 @@
         </router-link>
         <ul class="dropdown-menu" id="course-list" role="menu">
           <!-- TODO: Create course links programmatically -->
-          <li v-for="course in $store.state.registeredCourses">
+          <li v-for="course in $store.state.course.registeredCourses">
             <router-link :to="'/courses/' + course.courseId">
               <span class="nav-text">{{course.courseName}}</span>
             </router-link>
@@ -77,10 +77,6 @@
 
 <script>
   export default {
-    methods: {
-      getCourseList() {
-      }
-    },
     name: 'Sidebar',
     props: {},
   }
