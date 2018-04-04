@@ -33,32 +33,32 @@ const getters = {
 }
 
 const mutations = {
-  fetchRegisteredCourses: (state, courseList) => {
+  registeredCourses: (state, courseList) => {
     state.registeredCourses = courseList
   },
-  setVisibleLectures: (state, visibleLectureList) => {
-    state.visibleLectures = visibleLectureList
+  visibleLectures: (state, visibleLectures) => {
+    state.visibleLectures = visibleLectures
   }
 }
 
 const actions = {
-  getRegisteredCourses: ({commit, state, rootState}) => {
+  registeredCourses: ({commit, state, rootState}) => {
     // axios.get("https://jsonplaceholder.typicode.com/users").then(response => {
     axios.get(rootState.backendUrl + 'course')
       .then(response => {
-      const courses = response.data;
-      commit('fetchRegisteredCourses', courses);
-      console.log("Fetched " + courses.length + " courses:")
-      console.log(courses)
+      const courses = response.data
+      commit('registeredCourses', courses)
+      console.log("Fetched " + courses.length + " courses:", courses)
     })
       .catch(error => {
         console.log(error.response)
-      });
+      })
   },
-  updateVisibleLectures: ({commit, state}, courseId) => {
+  visibleLectures: ({commit, state}, courseId) => {
     const lectureIds = state.registeredCourses.filter(
       course => course.courseId === courseId)
-    console.log(lectureIds)
+    console.log('Filtered course: ', lectureIds)
+    commit('visibleLectures', lectureIds)
   }
 }
 

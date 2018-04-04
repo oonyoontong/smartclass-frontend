@@ -27,13 +27,24 @@ export default new Router({
           component: Course
         },
         {
-          path: '/courses/:courseId',
+          path: '/courses',
           component: Course,
-          props: true
+          props: true,
+          children: [
+            {
+              path: ':courseId'
+            }
+          ]
         },
         {
           path: '/quiz',
-          component: Quiz
+          component: Quiz,
+          props: true,
+          children: [
+            {
+              path: ':quizId'
+            }
+          ]
         },
         {
           path: '/announcements',

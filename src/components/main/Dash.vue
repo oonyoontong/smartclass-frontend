@@ -25,7 +25,7 @@
       Rightbar
     },
     beforeCreate() {
-      this.$store.dispatch('getRegisteredCourses')
+      this.$store.dispatch('registeredCourses')
     }
   }
 </script>

@@ -1,7 +1,7 @@
 <template>
   <div id="dashboard">
-    <h1>
-      Quiz
+    <h1 v-if="quizId">
+      Quiz id: {{quizId}}
     </h1>
   </div>
 </template>
@@ -10,6 +10,12 @@
   export default {
     name: "quiz-view",
     components: {
+    },
+    props: [
+      'quizId'
+    ],
+    beforeCreate(){
+      this.$store.dispatch('visibleLectures')
     }
   }
 </script>

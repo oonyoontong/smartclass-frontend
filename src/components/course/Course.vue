@@ -7,6 +7,7 @@
         </li>
       </ul>
     </div>
+    <h1 v-if="courseId">Course id: {{courseId}}</h1>
   </div>
 </template>
 
@@ -22,11 +23,8 @@
     props: [
       'courseId'
     ],
-    beforeUpdate() {
-      this.$store.dispatch('updateVisibleLectures', this.props)
-    },
-    beforeCreate() {
-      console.log(this.$store.state.course.visibleLectures)
+    created(){
+      this.$store.dispatch('visibleLectures', '50004')
     },
     methods: {
       lectureQuery: function () {
