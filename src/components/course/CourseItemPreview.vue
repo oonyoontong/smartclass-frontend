@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="courseId + '/lectures/' + previewInfo._id">
+  <router-link :to="'/courses/' + previewInfo.courseId + '/lectures/' + previewInfo._id">
     <section id="lecture-preview-container">
       <div id="lecture-preview-image">
         <img :src=previewInfo.previewImageUrl />
@@ -15,8 +15,7 @@
   export default {
     name: "lecture-view",
     props: [
-      'previewInfo',
-      'courseId'
+      'previewInfo'
     ],
   }
 </script>

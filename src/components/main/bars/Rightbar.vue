@@ -3,7 +3,7 @@
     <router-view name="rightbar"/>
   </aside>
 </template>
-
+/
 <script>
     export default {
         name: "rightbar"

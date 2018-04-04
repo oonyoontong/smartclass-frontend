@@ -8,6 +8,7 @@ import state from './state'
 
 import account from './modules/account'
 import course from './modules/course'
+import lecture from './modules/lecture'
 import quiz from './modules/quiz'
 import ui from './modules/ui'
 
@@ -17,6 +18,7 @@ export const store = new Vuex.Store({
   modules: {
     account,
     course,
+    lecture,
     quiz,
     ui
   },

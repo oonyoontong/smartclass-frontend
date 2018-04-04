@@ -5,6 +5,7 @@ import Login from '@/components/Login'
 import Dash from '@/components/main/Dash'
 import Course from '@/components/course/Course'
 import Lecture from '@/components/course/Lecture'
+import LiveQuestions from '@/components/course/LiveQuestions'
 import Quiz from '@/components/Quiz'
 import Announcement from '@/components/Announcement'
 import Calendar from '@/components/Calendar'
@@ -36,17 +37,19 @@ export default new Router({
               path: ':courseId',
               children: [
                 {
-                  path: 'lectures',
-                  component: Lecture,
-                  children: [
-                    {
-                      path: ':lectureId'
-                    }
-                  ]
+                  path: 'lectures'
                 }
               ]
             }
           ]
+        },
+        {
+          path: '/courses/:courseId/lectures/:lectureId',
+          components: {
+            default: Lecture,
+            rightbar: LiveQuestions
+          },
+          props: {default: true, rightbar: true}
         },
         {
           path: '/quiz',

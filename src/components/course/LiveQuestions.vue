@@ -1,5 +1,6 @@
 <template>
   <div id="ChatBox">
+    <h1>Live Questions</h1>
     <div class="col-s-2">
       <div class="ChatBox__List">
         <chat-message v-for="message in messages" v-bind:data="message"></chat-message>

@@ -3,34 +3,37 @@
     <div id="courses-content">
       <ul class="lecture-preview-container">
         <li v-for="preview in $store.state.course.visiblePreviews" class="lecture-preview-item">
-          <lecture :previewInfo=preview :courseId="courseId"></lecture>
+          <item-preview :previewInfo=preview />
         </li>
       </ul>
       <button v-on:click.prevent="updateLectures">Fetch lectures</button>
       <span>TODO: Move method from button to hook</span>
+      <h1>Course id: {{courseId}}</h1>
     </div>
-    <h1 v-if="courseId">Course id: {{courseId}}</h1>
   </div>
 </template>
 
 <script>
   //TODO: PULL LECTURES FROM SERVER, SORT BY QUERY
-  import LecturePreview from './CourseItemPreview'
+  import ItemPreview from './CourseItemPreview'
+  import Lecture from './Lecture'
 
   export default {
     name: "course-view",
     components: {
-      Lecture: LecturePreview
+      ItemPreview,
+      Lecture
     },
     props: [
-      'courseId'
+      'courseId',
+      'lectureId'
     ],
-    created(){
+    created() {
       // TODO: dispatch after registeredCourses has resolved
       // this.$store.dispatch('visiblePreviews', this.courseId)
     },
     methods: {
-      updateLectures: function(){
+      updateLectures: function () {
         this.$store.dispatch('visiblePreviews', this.courseId)
       }
     }
@@ -39,7 +42,7 @@
 
 <style scoped>
   #courses {
-    margin:  50px;
+    margin: 50px;
   }
 
   .lecture-preview-container {
