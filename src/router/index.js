@@ -34,22 +34,7 @@ export default new Router({
           props: true,
           children: [
             {
-              path: ':courseId',
-              children: [
-                {
-                  path: 'lecture/:lectureId',
-                  components: {
-                    default: Lecture,
-                    rightbar: LiveQuestions
-                  }
-                },
-                {
-                  path: 'quiz/:quizId',
-                  components: {
-                    default: Course
-                  }
-                }
-              ]
+              path: ':courseId'
             }
           ]
         },
@@ -61,15 +46,6 @@ export default new Router({
           },
           props: {default: true, rightbar: true}
         },
-        {
-          path: '/courses/:courseId/lecture/:lectureId',
-          components: {
-            default: Lecture,
-            rightbar: LiveQuestions
-          },
-          props: {default: true, rightbar: true}
-        },
-
         {
           path: '/announcements',
           component: Announcement
