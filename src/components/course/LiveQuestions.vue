@@ -6,9 +6,11 @@
         <chat-message v-for="message in messages" v-bind:data="message"></chat-message>
       </div>
 
+
       <div class="ChatBox__Input">
         <form @submit="sendMessage" action="/" method="post">
           <input type="text" v-model="newMessage" placeholder="Enter your message here">
+          <button type = "submit">Submit</button>
         </form>
       </div>
     </div>
@@ -17,6 +19,8 @@
 
 <script>
   import ChatMessage from './ChatMessage.vue'
+  import VueSocketio from "vue-socket.io"
+  import Vue from 'vue'
 
   export default {
     components: {ChatMessage},
@@ -27,40 +31,39 @@
         onlineUsers: []
       }
     },
+    props: [
+      'lectureId'
+    ],
     sockets: {
       'message received': function (message) {
         console.log("message received " + message);
-        this.$data.messages.push(message)
-      },
-      'user joined': function (message) {
-        this.$data.messages.push(message);
-        this.$data.onlineUsers.push(message.username)
-      },
-      'user left': function (message) {
         this.$data.messages.push(message)
       }
     },
     methods: {
       sendMessage(event) {
-        console.log("sending message" + this.newMessage);
-        event.preventDefault();
-        this.$socket.emit('send message', this.newMessage);
+        console.log("sending message")
+
+        event.preventDefault()
+        this.$socket.emit('send message', this.newMessage)
         this.newMessage = ''
       },
-      kickUser(event) {
-        event.preventDefault();
-        // Get the username of the user we're kicking
-        let usernameToKick = event.target.getAttribute('data-username');
-        // Tell the server to kick them from the chat
-        this.$socket.emit('kick user', usernameToKick)
-      }
+
     },
     computed: {
       // TODO: Surely there must be a better way to do this?
       isAdmin() {
         return this.$isAdmin
       }
+    },
+    mounted(){
+      this.$socket.emit("room", this.$route.params)
+    },
+
+    beforeDestroy(){
+      this.$socket.emit("leave room","leave room")
     }
+
   }
 </script>
 

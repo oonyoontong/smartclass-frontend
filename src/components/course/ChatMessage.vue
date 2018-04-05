@@ -20,13 +20,7 @@
 
 <script>
   export default {
-    data() {
-      return {
-        upvotes: 0
-      }
-    },
     props: ['data'],
-
     computed: {
       isAlert() {
         return this.data.type === 'alert'
@@ -35,7 +29,7 @@
 
     methods: {
       upVote: function () {
-        console.log("upvaote");
+        console.log("upvote");
         this.$data.upvotes++;
       }
 

@@ -36,6 +36,12 @@
       updateLectures: function () {
         this.$store.dispatch('visiblePreviews', this.courseId)
       }
+    },
+
+    beforeUpdate(){
+      console.log("beforeUpdate");
+      console.log(this.params);
+      this.$store.dispatch('visiblePreviews', this.params)
     }
   }
 </script>
