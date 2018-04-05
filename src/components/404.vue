@@ -14,8 +14,9 @@
 
 <style scoped>
   #notFound {
-    background: black;
+    background: #111;
     padding: 10em;
-    color: white;
+    height: 100vh;
+    color: #BBB;
   }
 </style>

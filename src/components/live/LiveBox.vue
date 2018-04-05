@@ -6,12 +6,12 @@
   import LiveInput from "./LiveInput";
   import LiveMessage from "./LiveMessage";
     export default {
-      name: "live-box",
+      name: "liveQuestions-box",
       components: {
         LiveInput,
         LiveMessage
       },
-       
+
 
     }
 </script>

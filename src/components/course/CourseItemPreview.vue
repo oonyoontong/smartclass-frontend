@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="'/courses/' + previewInfo.courseId + '/lectures/' + previewInfo._id">
+  <router-link :to="redirectUrl">
     <section id="lecture-preview-container">
       <div id="lecture-preview-image">
         <img :src=previewInfo.previewImageUrl />
@@ -17,6 +17,11 @@
     props: [
       'previewInfo'
     ],
+    computed: {
+      redirectUrl(){
+        return '/courses/' + this.previewInfo.courseId + '/lecture/' + this.previewInfo._id
+      }
+    }
   }
 </script>
 
