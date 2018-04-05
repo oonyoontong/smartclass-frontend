@@ -1,7 +1,7 @@
 <template xmlns:v-if="http://www.w3.org/1999/xhtml">
   <div id="courses">
     <div id="courses-content">
-      <ul class="lecture-preview-container">
+      <ul class="preview-container">
         <li v-for="preview in $store.state.course.visiblePreviews" class="lecture-preview-item">
           <item-preview :previewInfo=preview />
         </li>
@@ -28,9 +28,8 @@
       'courseId',
       'lectureId'
     ],
-    created() {
-      // TODO: dispatch after registeredCourses has resolved
-      // this.$store.dispatch('visiblePreviews', this.courseId)
+     mounted() {
+      this.$store.dispatch('visiblePreviews', this.courseId)
     },
     methods: {
       updateLectures: function () {
@@ -51,7 +50,7 @@
     margin: 50px;
   }
 
-  .lecture-preview-container {
+  .preview-container {
     margin: 0;
     padding: 0;
     display: flex;

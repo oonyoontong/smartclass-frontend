@@ -1,5 +1,6 @@
 const state = {
-  quizContent: []
+  quizContent: [],
+  activeQuizId: null
 }
 
 const getters = {
@@ -9,8 +10,9 @@ const getters = {
 }
 
 const mutations = {
-  setQuizContent(state, newQuizContent) {
-    state.quizContent = newQuizContent
+  setQuizContent(state, {quizId, quizContent}) {
+    state.activeQuizId = quizId
+    state.quizContent = quizContent
   }
 }
 
