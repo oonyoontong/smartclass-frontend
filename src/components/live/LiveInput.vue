@@ -4,7 +4,7 @@
 
 <script>
     export default {
-        name: "live-input"
+        name: "liveQuestions-input"
     }
 </script>
 

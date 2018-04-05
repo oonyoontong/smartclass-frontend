@@ -37,14 +37,24 @@ export default new Router({
               path: ':courseId',
               children: [
                 {
-                  path: 'lectures'
+                  path: 'lecture/:lectureId',
+                  components: {
+                    default: Lecture,
+                    rightbar: LiveQuestions
+                  }
+                },
+                {
+                  path: 'quiz/:quizId',
+                  components: {
+                    default: Course
+                  }
                 }
               ]
             }
           ]
         },
         {
-          path: '/courses/:courseId/lectures/:lectureId',
+          path: '/courses/:courseId/lecture/:lectureId',
           components: {
             default: Lecture,
             rightbar: LiveQuestions
@@ -52,22 +62,21 @@ export default new Router({
           props: {default: true, rightbar: true}
         },
         {
-          path: '/quiz',
-          component: Quiz,
-          props: true,
-          children: [
-            {
-              path: ':quizId'
-            }
-          ]
+          path: '/courses/:courseId/lecture/:lectureId',
+          components: {
+            default: Lecture,
+            rightbar: LiveQuestions
+          },
+          props: {default: true, rightbar: true}
         },
+
         {
           path: '/announcements',
           component: Announcement
         },
         {
           path: '/stats',
-          components:{
+          components: {
             default: Statistics,
             rightbar: Announcement
           }

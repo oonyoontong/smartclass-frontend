@@ -4,7 +4,7 @@
 
 <script>
     export default {
-        name: "live-message",
+        name: "liveQuestions-message",
       components: [
 
       ]
