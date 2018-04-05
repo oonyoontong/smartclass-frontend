@@ -6,13 +6,13 @@
 
     <div class="Message--Message" v-else>
       <p class="Message__Author">
-        {{ data.timestamp }}
+        {{data.upvotes}}
       </p>
 
       <p class="Message__Content">
-        {{ data.message }}
+        {{ data.question }}
       </p>
-      <label>{{upvotes}}</label>
+
       <button v-on:click="upVote">upvote</button>
     </div>
   </div>

@@ -1,4 +1,5 @@
 export default {
-  backendUrl: "https://smartclass-backend.herokuapp.com/",
+  /*"https://smartclass-backend.herokuapp.com/"*/
+  backendUrl: "http://localhost:5000/",
   isPlatformMobile: false
 }

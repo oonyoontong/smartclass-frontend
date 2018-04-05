@@ -3,14 +3,14 @@
     <h1>Live Questions</h1>
     <div class="col-s-2">
       <div class="ChatBox__List">
-        <chat-message v-for="message in messages" v-bind:data="message"></chat-message>
+
+        <chat-message v-for="message in $store.state.live.liveList" v-bind:data="message"></chat-message>
       </div>
 
 
       <div class="ChatBox__Input">
         <form @submit="sendMessage" action="/" method="post">
           <input type="text" v-model="newMessage" placeholder="Enter your message here">
-          <button type = "submit">Submit</button>
         </form>
       </div>
     </div>
@@ -19,16 +19,12 @@
 
 <script>
   import ChatMessage from './ChatMessage.vue'
-  import VueSocketio from "vue-socket.io"
-  import Vue from 'vue'
 
   export default {
     components: {ChatMessage},
     data() {
       return {
-        newMessage: '',
-        messages: [],
-        onlineUsers: []
+        newMessage: ''
       }
     },
     props: [
@@ -37,15 +33,18 @@
     sockets: {
       'message received': function (message) {
         console.log("message received " + message);
-        this.$data.messages.push(message)
+        this.$store.commit('SOCKET_ADD_LIVE_QUESTION',message)
       }
     },
     methods: {
       sendMessage(event) {
         console.log("sending message")
-
+        var payload = {
+          lectureId: this.$route.params['lectureId'],
+          question: this.newMessage
+        }
         event.preventDefault()
-        this.$socket.emit('send message', this.newMessage)
+        this.$socket.emit('send message', payload)
         this.newMessage = ''
       },
 
@@ -57,9 +56,13 @@
       }
     },
     mounted(){
-      this.$socket.emit("room", this.$route.params)
+      this.$socket.emit("room", this.$route.params['lectureId'])
+      this.$store.dispatch("fetchLiveList", this.$route.params['lectureId']);
     },
-
+    created(){
+      console.log("CREATED!")
+      console.log(this.$route.params)
+    },
     beforeDestroy(){
       this.$socket.emit("leave room","leave room")
     }
