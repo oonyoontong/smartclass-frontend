@@ -4,7 +4,7 @@
     <div class="col-s-2">
       <div class="ChatBox__List">
 
-        <chat-message v-for="message in $store.state.live.liveList" v-bind:data="message"></chat-message>
+        <chat-message v-for="message in $store.getters.getLiveList" v-bind:data="message"></chat-message>
       </div>
 
 
@@ -34,6 +34,9 @@
       'message received': function (message) {
         console.log("message received " + message);
         this.$store.commit('SOCKET_ADD_LIVE_QUESTION',message)
+      },
+      'upvote received': function (message) {
+        this.$store.dispatch("fetchLiveList", this.$route.params['lectureId']);
       }
     },
     methods: {
@@ -58,6 +61,7 @@
     mounted(){
       this.$socket.emit("room", this.$route.params['lectureId'])
       this.$store.dispatch("fetchLiveList", this.$route.params['lectureId']);
+      console.log(this.$store)
     },
     created(){
       console.log("CREATED!")

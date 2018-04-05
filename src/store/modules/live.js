@@ -5,9 +5,9 @@ const state = {
 }
 
 const getters = {
-  getLiveList(){
+  getLiveList: (state) => {
     state.liveList.sort(function(left,right){
-      return (left.upvotes > right.upvotes) ? 1 : ((right.upvotes > left.upvotes) ? -1 : 0)
+      return (left.upvotes < right.upvotes) ? 1 : ((right.upvotes < left.upvotes) ? -1 : 0)
     })
     return state.liveList;
   }

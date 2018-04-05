@@ -45,7 +45,6 @@ function LoginRequest(username, pass, cb) {
       username: username,
       password: pass
     }).then(function (response) {
-    console.log(response.data);
     cb(response.data);
   })
 }

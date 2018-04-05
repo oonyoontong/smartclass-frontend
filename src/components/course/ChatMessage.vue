@@ -28,9 +28,8 @@
     },
 
     methods: {
-      upVote: function () {
-        console.log("upvote");
-        this.$data.upvotes++;
+      upVote(event){
+        this.$socket.emit('upvote', this.data)
       }
 
     }
