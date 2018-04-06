@@ -9,7 +9,7 @@ const state = {
   defaultPreviewImageUrl: "http://www.raisedeyebrow.com/sites/www.raisedeyebrow.com/files/blog/2012/01/fff.png",
   registeredCourses: [],
   coursesLoaded: false,
-  activeCourse: null,
+  activeCourse: "all",
   visiblePreviews: [
     {
       courseId: "5ac3e2f453768d1d4c0330c3",
@@ -77,6 +77,7 @@ const actions = {
         state.coursesLoaded = true
       })
   },
+  // TODO: grab all lectures on page load
   async visiblePreviews ({dispatch, commit, state, rootState}, courseId) {
     if(!state.coursesLoaded) await dispatch('registeredCourses')
     const id = state.registeredCourses.find(item => {

@@ -80,7 +80,6 @@
     props: {},
     methods: {
       setActiveCourse: function(courseId) {
-        console.log("Setting active course.")
         this.$store.commit('activeCourse', courseId)
       }
     }

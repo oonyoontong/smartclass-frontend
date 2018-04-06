@@ -6,8 +6,7 @@
           <item-preview :previewInfo=preview />
         </li>
       </ul>
-      <button v-on:click.prevent="updateLectures">Fetch lectures</button>
-      <span>TODO: Move method from button to hook</span>
+      <!--<button v-on:click.prevent="updateLectures">Fetch lectures</button>-->
       <h1>Course id: {{courseId}}</h1>
     </div>
   </div>

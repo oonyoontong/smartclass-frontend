@@ -1,15 +1,12 @@
 <template>
   <div id="ChatBox">
-    <h1>Live Questions</h1>
-    <div class="col-s-2">
-      <div class="ChatBox__List">
-        <chat-message v-for="message in $store.getters.getLiveList" :data="message"></chat-message>
-      </div>
-      <div class="ChatBox__Input">
-        <form @submit="sendMessage" action="/" method="post">
-          <input type="text" v-model="newMessage" placeholder="Enter your message here">
-        </form>
-      </div>
+    <div class="ChatBox__List">
+      <chat-message v-for="message in $store.getters.getLiveList" :data="message"></chat-message>
+    </div>
+    <div class="ChatBox__Input">
+      <form @submit="sendMessage" action="/" method="post">
+        <input type="text" v-model="newMessage" placeholder="Enter your message here">
+      </form>
     </div>
   </div>
 </template>
@@ -61,7 +58,6 @@
       console.log(this.$store)
     },
     created(){
-      console.log("CREATED!")
       console.log(this.$route.params)
     },
     beforeDestroy(){
@@ -73,6 +69,11 @@
 
 <style>
   #ChatBox {
+    display: grid;
+    grid-template-areas:
+      "questions"
+      "input";
+    grid-template-rows: 82vh auto;
     width: 100%;
     height: 100%;
     margin-right: 0;
@@ -89,20 +90,20 @@
   }
 
   .ChatBox__Right {
-    height: 100vh;
+    height: 80vh;
     border-left: 1px solid #eee;
     background: #F7F7F7;
     box-shadow: -10px 0 40px #F1F1F1;
   }
 
   .ChatBox__List {
-    height: 90vh;
     overflow: scroll;
+    grid-area: questions;
   }
 
   .ChatBox__Input {
-    height: 10vh;
     background: #eee;
+    grid-area: input;
     border-top: 3px solid #ddd;
     padding: 20px;
   }
