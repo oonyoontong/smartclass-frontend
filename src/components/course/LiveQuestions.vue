@@ -1,6 +1,5 @@
 <template>
   <div id="ChatBox">
-    <h1>Live Questions</h1>
     <div class="col-s-2">
       <div class="ChatBox__List">
         <chat-message v-for="message in $store.getters.getLiveList" v-bind:data="message" :key="message._id"></chat-message>
@@ -137,52 +136,3 @@
     color: #999;
   }
 </style>
-<!--
-<template>
-    <div>
-        <h1>LIVE QUESTIONS</h1>
-
-        <div id="chat">
-
-
-        </div>
-
-        <div>
-            <p v-if="isConnected">We're connected to the server!</p>
-            <button @click="clickButton">Ping Server</button>
-        </div>
-    </div>
-
-
-</template>
-
-<script>
-    export default {
-        data() {
-            return {
-                newMessage: '',
-                messages: [],
-                onlineUsers: []
-            }
-        },
-        sockets:{
-            connect: function(){
-                console.log('socket connected')
-            },
-            customEmit: function(val){
-                console.log('this method was fired by the socket server. eg: io.emit("customEmit", data)')
-            }
-        },
-        methods: {
-            clickButton: function(val){
-                // $socket is socket.io-client instance
-                this.$socket.emit('emit_method', val);
-            }
-        }
-    }
-</script>
-
-
-<style scoped>
-
-</style>-->
