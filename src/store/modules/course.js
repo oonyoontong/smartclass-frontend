@@ -8,7 +8,8 @@ axios.interceptors.request.use(request => {
 const state = {
   defaultPreviewImageUrl: "http://www.raisedeyebrow.com/sites/www.raisedeyebrow.com/files/blog/2012/01/fff.png",
   registeredCourses: [],
-  activeCouse: null,
+  coursesLoaded: false,
+  activeCourse: null,
   visiblePreviews: [
     {
       courseId: "5ac3e2f453768d1d4c0330c3",
@@ -73,10 +74,11 @@ const actions = {
         const courses = response.data
         commit('registeredCourses', courses)
         console.log("Fetched " + courses.length + " courses:", courses)
+        state.coursesLoaded = true
       })
   },
   async visiblePreviews ({dispatch, commit, state, rootState}, courseId) {
-    await dispatch('registeredCourses')
+    if(!state.coursesLoaded) await dispatch('registeredCourses')
     const id = state.registeredCourses.find(item => {
       if (item.courseId === courseId) return item._id
     })

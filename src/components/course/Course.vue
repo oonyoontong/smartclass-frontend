@@ -28,20 +28,24 @@
       'courseId',
       'lectureId'
     ],
+    computed: {
+      activeCourse: function() {
+        return this.$store.state.course.activeCourse
+      }
+    },
+    watch: {
+      activeCourse(courseId) {
+        this.updateLectures(courseId)
+      }
+    },
      mounted() {
-      this.$store.dispatch('visiblePreviews', this.courseId)
+      this.updateLectures(this.courseId)
     },
     methods: {
       updateLectures: function () {
         this.$store.dispatch('visiblePreviews', this.courseId)
       }
     },
-
-    beforeUpdate(){
-      console.log("beforeUpdate");
-      console.log(this.params);
-      this.$store.dispatch('visiblePreviews', this.params)
-    }
   }
 </script>
 

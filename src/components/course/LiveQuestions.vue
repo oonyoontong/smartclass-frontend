@@ -3,11 +3,8 @@
     <h1>Live Questions</h1>
     <div class="col-s-2">
       <div class="ChatBox__List">
-
-        <chat-message v-for="message in $store.getters.getLiveList" v-bind:data="message"></chat-message>
+        <chat-message v-for="message in $store.getters.getLiveList" :data="message"></chat-message>
       </div>
-
-
       <div class="ChatBox__Input">
         <form @submit="sendMessage" action="/" method="post">
           <input type="text" v-model="newMessage" placeholder="Enter your message here">

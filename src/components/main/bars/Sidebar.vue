@@ -9,10 +9,9 @@
           </span>
         </router-link>
         <ul class="dropdown-menu" id="course-list" role="menu">
-          <!-- TODO: Create course links programmatically -->
           <li v-for="course in $store.state.course.registeredCourses">
             <router-link :to="'/courses/' + course.courseId">
-              <span class="nav-text">{{course.courseName}}</span>
+              <span class="nav-text" v-on:click="setActiveCourse(course.courseId)">{{course.courseName}}</span>
             </router-link>
           </li>
         </ul>
@@ -79,6 +78,12 @@
   export default {
     name: 'Sidebar',
     props: {},
+    methods: {
+      setActiveCourse: function(courseId) {
+        console.log("Setting active course.")
+        this.$store.commit('activeCourse', courseId)
+      }
+    }
   }
 </script>
 
