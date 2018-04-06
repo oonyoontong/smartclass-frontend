@@ -4,7 +4,7 @@
     <div class="col-s-2">
       <div class="ChatBox__List">
 
-        <chat-message v-for="message in $store.getters.getLiveList" v-bind:data="message"></chat-message>
+        <chat-message v-for="message in $store.getters.getLiveList" v-bind:data="message" :key="message._id"></chat-message>
       </div>
 
 

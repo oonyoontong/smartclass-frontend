@@ -1,10 +1,6 @@
 <template>
   <div class="Message">
-    <div class="Message--Alert" v-if="isAlert">
-      <strong>{{ data.message }}</strong>
-    </div>
-
-    <div class="Message--Message" v-else>
+    <div class="Message--Message">
       <p class="Message__Author">
         {{data.upvotes}}
       </p>
@@ -13,7 +9,7 @@
         {{ data.question }}
       </p>
 
-      <button v-on:click="upVote">upvote</button>
+      <button v-on:click="upVote" :disabled="upvoteSubmitted">upvote</button>
     </div>
   </div>
 </template>
@@ -22,8 +18,8 @@
   export default {
     props: ['data'],
     computed: {
-      isAlert() {
-        return this.data.type === 'alert'
+      upvoteSubmitted: () => {
+        return false;
       }
     },
 
