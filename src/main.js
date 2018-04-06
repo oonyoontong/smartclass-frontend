@@ -1,13 +1,10 @@
-
 import Vue from 'vue'
 import App from './App'
 import router from './router'
 import { store } from './store/index'
 import VueSocketio from "vue-socket.io"
 
-Vue.use(VueSocketio,"http://localhost:5000")
-
-
+Vue.use(VueSocketio, "https://smartclass-backend.herokuapp.com/")
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

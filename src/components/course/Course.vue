@@ -6,8 +6,7 @@
           <item-preview :previewInfo=preview />
         </li>
       </ul>
-      <button v-on:click.prevent="updateLectures">Fetch lectures</button>
-      <span>TODO: Move method from button to hook</span>
+      <!--<button v-on:click.prevent="updateLectures">Fetch lectures</button>-->
       <h1>Course id: {{courseId}}</h1>
     </div>
   </div>
@@ -28,20 +27,24 @@
       'courseId',
       'lectureId'
     ],
+    computed: {
+      activeCourse: function() {
+        return this.$store.state.course.activeCourse
+      }
+    },
+    watch: {
+      activeCourse(courseId) {
+        this.updateLectures(courseId)
+      }
+    },
      mounted() {
-      this.$store.dispatch('visiblePreviews', this.courseId)
+      this.updateLectures(this.courseId)
     },
     methods: {
       updateLectures: function () {
         this.$store.dispatch('visiblePreviews', this.courseId)
       }
     },
-
-    beforeUpdate(){
-      console.log("beforeUpdate");
-      console.log(this.params);
-      this.$store.dispatch('visiblePreviews', this.params)
-    }
   }
 </script>
 
