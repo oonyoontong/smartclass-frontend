@@ -1,5 +1,5 @@
 <template>
-  <nav class="sidebar-nav" role="navigation">
+  <nav id="sidebar" class="sidebar-nav" role="navigation" :class="{expanded: sidebarHover}" v-on:mouseover='setHover(true)' v-on:mouseleave='setHover(false)'>
     <ul>
       <li class="dropdown">
         <router-link to="/courses">
@@ -18,128 +18,74 @@
       </li>
 
       <li>
-        <router-link to="/quiz">
-          <i class="fas fa-pencil-alt fa-2x"></i>
-          <span class="nav-text">
-                Quiz
-          </span>
-        </router-link>
+        <sidebar-item :icon='"fa-list"' :text='"Courses"' :redirect-url='"/courses"' :sidebar-hover='sidebarHover'
+                      :sub-items='[{redirectUrl: "/courses/course1", text: "Course 1"}, {redirectUrl: "/courses/course2", text: "Course 2"}]'/>
       </li>
 
       <li>
-        <router-link to="/announcements">
-          <i class="fas fa-bullhorn fa-2x"></i>
-          <span class="nav-text">
-                Announcements
-          </span>
-        </router-link>
+        <sidebar-item :icon='"fa-pencil-alt"' :text='"Quiz"' :redirect-url='"/quiz"' :sidebar-hover='sidebarHover'/>
       </li>
 
       <li>
-        <router-link to="/stats">
-          <i class="fas fa-chart-bar fa-2x"></i>
-          <span class="nav-text">
-              Graphs and Statistics
-          </span>
-        </router-link>
+        <sidebar-item :icon='"fa-bullhorn"' :text='"Announcements"' :redirect-url='"/announcements"' :sidebar-hover='sidebarHover'/>
       </li>
 
       <li>
-        <router-link to="/calendar">
-          <i class="fas fa-calendar fa-2x"></i>
-          <span class="nav-text">
-              Calendar
-          </span>
-        </router-link>
+        <sidebar-item :icon='"fa-chart-bar"' :text='"Statistics"' :redirect-url='"/stats"' :sidebar-hover='sidebarHover'/>
       </li>
 
       <li>
-        <router-link to="/settings/profile">
-          <i class="fas fa-user fa-2x"></i>
-          <span class="nav-text">
-              Profile
-          </span>
-        </router-link>
-      </li>
-
-      <li>
-        <router-link to="/settings">
-          <i class="fas fa-cog fa-2x"></i>
-          <span class="nav-text">
-              Settings
-          </span>
-        </router-link>
+        <sidebar-item :icon='"fa-cog"' :text='"Settings"' :redirect-url='"/settings"' :sidebar-hover='sidebarHover'/>
       </li>
     </ul>
   </nav>
 </template>
 
 <script>
+  import SidebarItem from './SidebarItem'
+
   export default {
     name: 'Sidebar',
-    props: {},
+    components: {
+      SidebarItem
+    },
+    data(){
+      return {
+        sidebarHover: false
+      }
+    },
+    computed: {
+    },
     methods: {
-      setActiveCourse: function(courseId) {
-        this.$store.commit('activeCourse', courseId)
+      setHover: function(hoverStatus) {
+        // this.$store.commit('sidebarHover', hoverStatus)
+        this.sidebarHover = hoverStatus
       }
     }
   }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
   /*SIDEBAR STYLING*/
   @import url(https://fonts.googleapis.com/css?family=Titillium+Web:300);
 
   .sidebar-nav {
     background: #212121;
     overflow: hidden;
-    -webkit-transition: width 0.2s ease-in-out;
-    transition: width 0.2s ease-in-out;
-    width: 3%;
+    width: 100%;
     min-width: 60px;
-    -webkit-transform: translateZ(0) scale(1, 1);
+    transition: width .3s;
+    transform: translateZ(0) scale(1, 1);
     z-index: 100;
-  }
-
-  .sidebar-nav > ul {
-    display: table;
-    padding: 0;
-    margin: 25px 0;
-    font-size: 14px;
-    width: 250px;
-  }
-
-  .sidebar-nav li {
-    display: block;
-    transition: all .2s ease-in-out;
-    width: 250px;
-  }
-
-  .sidebar-nav li a {
-    transition: all .2s ease-in-out;
-  }
-
-  .sidebar-nav li > a {
-    display: table;
-    border-spacing: 0;
-    color: #999;
-    -webkit-transform: translateZ(0) scale(1, 1);
-  }
-
-  .sidebar-nav .nav-text {
-    font-family: 'Titillium Web', sans-serif;
-    display: table-cell;
-    vertical-align: middle;
-  }
-
-  .sidebar-nav:hover {
-    width: 250px;
-    /*overflow: visible;*/
-  }
-
-  .sidebar-nav li > a:hover{
-    color: #fff;
-    background-color: #5fa2db;
+    &.expanded {
+      width: 250px;
+      max-width: 30vw;
+    }
+    > ul {
+      display: block;
+      padding: 0;
+      width: 100%;
+    }
   }
 
   .dropdown-menu {
@@ -168,10 +114,6 @@
     -webkit-transition: all .1s linear;
     transition: all .1s linear;
     text-align: center;
-  }
-
-  .dropdown:hover .dropdown-menu {
-    display: block;
   }
 
   nav {
