@@ -18,9 +18,6 @@
     name: "Dash",
     // beforeRouteEnter: console.log(store.courseList),
     computed: {
-      sidebarHover: function() {
-        return this.$store.state.sidebarHover
-      }
     },
     components: {
       Headerbar,
@@ -28,7 +25,7 @@
       Rightbar
     },
     beforeCreate() {
-      this.$store.dispatch('registeredCourses')
+      // this.$store.dispatch('registeredCourses')
     }
   }
 </script>

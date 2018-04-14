@@ -1,64 +1,59 @@
 <template>
-  <nav id="sidebar" class="sidebar-nav" role="navigation" :class="{expanded: sidebarHover}" v-on:mouseover='setHover(true)' v-on:mouseleave='setHover(false)'>
+  <nav id="sidebar" class="sidebar-nav" role="navigation" :class="{expanded: sidebarHover}"
+       v-on:mouseover='setHover(true)' v-on:mouseleave='setHover(false)'>
     <ul>
-      <li class="dropdown">
-        <router-link to="/courses">
-          <i class="fas fa-list fa-2x"></i>
-          <span class="nav-text">
-              Courses
-          </span>
-        </router-link>
-        <ul class="dropdown-menu" id="course-list" role="menu">
-          <li v-for="course in $store.state.course.registeredCourses">
-            <router-link :to="'/courses/' + course.courseId">
-              <span class="nav-text" v-on:click="setActiveCourse(course.courseId)">{{course.courseName}}</span>
-            </router-link>
-          </li>
-        </ul>
+      <li>
+        <sidebar-item :icon='"fa-list"' :text='"Courses"' :url='""' :sidebar-hover='sidebarHover' :sub-items='courses'/>
       </li>
 
       <li>
-        <sidebar-item :icon='"fa-list"' :text='"Courses"' :redirect-url='"/courses"' :sidebar-hover='sidebarHover'
-                      :sub-items='[{redirectUrl: "/courses/course1", text: "Course 1"}, {redirectUrl: "/courses/course2", text: "Course 2"}]'/>
+        <sidebar-item :icon='"fa-pencil-alt"' :text='"Quiz"' :url='"/quiz"' :sidebar-hover='sidebarHover'/>
       </li>
 
       <li>
-        <sidebar-item :icon='"fa-pencil-alt"' :text='"Quiz"' :redirect-url='"/quiz"' :sidebar-hover='sidebarHover'/>
+        <sidebar-item :icon='"fa-bullhorn"' :text='"Announcements"' :url='"/announcements"'
+                      :sidebar-hover='sidebarHover'/>
       </li>
 
       <li>
-        <sidebar-item :icon='"fa-bullhorn"' :text='"Announcements"' :redirect-url='"/announcements"' :sidebar-hover='sidebarHover'/>
+        <sidebar-item :icon='"fa-chart-bar"' :text='"Statistics"' :url='"/stats"' :sidebar-hover='sidebarHover'/>
       </li>
 
       <li>
-        <sidebar-item :icon='"fa-chart-bar"' :text='"Statistics"' :redirect-url='"/stats"' :sidebar-hover='sidebarHover'/>
-      </li>
-
-      <li>
-        <sidebar-item :icon='"fa-cog"' :text='"Settings"' :redirect-url='"/settings"' :sidebar-hover='sidebarHover'/>
+        <sidebar-item :icon='"fa-cog"' :text='"Settings"' :url='"/settings"' :sidebar-hover='sidebarHover'/>
       </li>
     </ul>
   </nav>
 </template>
 
 <script>
-  import SidebarItem from './SidebarItem'
+  import SidebarItem from "./SidebarItem"
 
   export default {
-    name: 'Sidebar',
+    name: "Sidebar",
     components: {
       SidebarItem
     },
-    data(){
+    data() {
       return {
         sidebarHover: false
       }
     },
     computed: {
+      courses: function () {
+        const ret = []
+        this.$store.getters.registeredCoursesAsMap.forEach(course => {
+          ret.push({
+            url: "/courses/" + course.courseId,
+            text: course.courseName,
+            id: course.courseId
+          })
+        })
+        return ret
+      }
     },
     methods: {
-      setHover: function(hoverStatus) {
-        // this.$store.commit('sidebarHover', hoverStatus)
+      setHover: function (hoverStatus) {
         this.sidebarHover = hoverStatus
       }
     }
@@ -74,7 +69,7 @@
     overflow: hidden;
     width: 100%;
     min-width: 60px;
-    transition: width .3s;
+    transition: width 0.3s;
     transform: translateZ(0) scale(1, 1);
     z-index: 100;
     &.expanded {
@@ -82,8 +77,10 @@
       max-width: 30vw;
     }
     > ul {
-      display: block;
+      display: flex;
+      flex-direction: column;
       padding: 0;
+      margin: 0;
       width: 100%;
     }
   }
@@ -111,8 +108,8 @@
     font-size: 14px;
     text-decoration: none;
     -webkit-transform: translateZ(0) scale(1, 1);
-    -webkit-transition: all .1s linear;
-    transition: all .1s linear;
+    -webkit-transition: all 0.1s linear;
+    transition: all 0.1s linear;
     text-align: center;
   }
 
@@ -123,5 +120,4 @@
     -o-user-select: none;
     user-select: none;
   }
-
 </style>
