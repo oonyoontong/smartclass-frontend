@@ -20,7 +20,7 @@
   }
 </script>
 
-<style>
+<style scoped>
   .datetime-picker input {
     height: 4em !important;
   }

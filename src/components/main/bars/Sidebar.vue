@@ -1,145 +1,88 @@
 <template>
-  <nav class="sidebar-nav" role="navigation">
+  <nav id="sidebar" class="sidebar-nav" role="navigation" :class="{expanded: sidebarHover}"
+       v-on:mouseover='setHover(true)' v-on:mouseleave='setHover(false)'>
     <ul>
-      <li class="dropdown">
-        <router-link to="/courses">
-          <i class="fas fa-list fa-2x"></i>
-          <span class="nav-text">
-              Courses
-          </span>
-        </router-link>
-        <ul class="dropdown-menu" id="course-list" role="menu">
-          <li v-for="course in $store.state.course.registeredCourses">
-            <router-link :to="'/courses/' + course.courseId">
-              <span class="nav-text" v-on:click="setActiveCourse(course.courseId)">{{course.courseName}}</span>
-            </router-link>
-          </li>
-        </ul>
+      <li>
+        <sidebar-item :icon='"fa-list"' :text='"Courses"' :url='""' :sidebar-hover='sidebarHover' :sub-items='courses'/>
       </li>
 
       <li>
-        <router-link to="/quiz">
-          <i class="fas fa-pencil-alt fa-2x"></i>
-          <span class="nav-text">
-                Quiz
-          </span>
-        </router-link>
+        <sidebar-item :icon='"fa-pencil-alt"' :text='"Quiz"' :url='"/quiz"' :sidebar-hover='sidebarHover'/>
       </li>
 
       <li>
-        <router-link to="/announcements">
-          <i class="fas fa-bullhorn fa-2x"></i>
-          <span class="nav-text">
-                Announcements
-          </span>
-        </router-link>
+        <sidebar-item :icon='"fa-bullhorn"' :text='"Announcements"' :url='"/announcements"'
+                      :sidebar-hover='sidebarHover'/>
       </li>
 
       <li>
-        <router-link to="/stats">
-          <i class="fas fa-chart-bar fa-2x"></i>
-          <span class="nav-text">
-              Graphs and Statistics
-          </span>
-        </router-link>
+        <sidebar-item :icon='"fa-chart-bar"' :text='"Statistics"' :url='"/stats"' :sidebar-hover='sidebarHover'/>
       </li>
 
       <li>
-        <router-link to="/calendar">
-          <i class="fas fa-calendar fa-2x"></i>
-          <span class="nav-text">
-              Calendar
-          </span>
-        </router-link>
-      </li>
-
-      <li>
-        <router-link to="/settings/profile">
-          <i class="fas fa-user fa-2x"></i>
-          <span class="nav-text">
-              Profile
-          </span>
-        </router-link>
-      </li>
-
-      <li>
-        <router-link to="/settings">
-          <i class="fas fa-cog fa-2x"></i>
-          <span class="nav-text">
-              Settings
-          </span>
-        </router-link>
+        <sidebar-item :icon='"fa-cog"' :text='"Settings"' :url='"/settings"' :sidebar-hover='sidebarHover'/>
       </li>
     </ul>
   </nav>
 </template>
 
 <script>
+  import SidebarItem from "./SidebarItem"
+
   export default {
-    name: 'Sidebar',
-    props: {},
+    name: "Sidebar",
+    components: {
+      SidebarItem
+    },
+    data() {
+      return {
+        sidebarHover: false
+      }
+    },
+    computed: {
+      courses: function () {
+        const ret = []
+        this.$store.getters.registeredCoursesAsMap.forEach(course => {
+          ret.push({
+            url: "/courses/" + course.courseId,
+            text: course.courseName,
+            id: course.courseId
+          })
+        })
+        return ret
+      }
+    },
     methods: {
-      setActiveCourse: function(courseId) {
-        this.$store.commit('activeCourse', courseId)
+      setHover: function (hoverStatus) {
+        this.sidebarHover = hoverStatus
       }
     }
   }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
   /*SIDEBAR STYLING*/
   @import url(https://fonts.googleapis.com/css?family=Titillium+Web:300);
 
   .sidebar-nav {
     background: #212121;
     overflow: hidden;
-    -webkit-transition: width 0.2s ease-in-out;
-    transition: width 0.2s ease-in-out;
-    width: 3%;
+    width: 100%;
     min-width: 60px;
-    -webkit-transform: translateZ(0) scale(1, 1);
+    transition: width 0.3s;
+    transform: translateZ(0) scale(1, 1);
     z-index: 100;
-  }
-
-  .sidebar-nav > ul {
-    display: table;
-    padding: 0;
-    margin: 25px 0;
-    font-size: 14px;
-    width: 250px;
-  }
-
-  .sidebar-nav li {
-    display: block;
-    transition: all .2s ease-in-out;
-    width: 250px;
-  }
-
-  .sidebar-nav li a {
-    transition: all .2s ease-in-out;
-  }
-
-  .sidebar-nav li > a {
-    display: table;
-    border-spacing: 0;
-    color: #999;
-    -webkit-transform: translateZ(0) scale(1, 1);
-  }
-
-  .sidebar-nav .nav-text {
-    font-family: 'Titillium Web', sans-serif;
-    display: table-cell;
-    vertical-align: middle;
-  }
-
-  .sidebar-nav:hover {
-    width: 250px;
-    /*overflow: visible;*/
-  }
-
-  .sidebar-nav li > a:hover{
-    color: #fff;
-    background-color: #5fa2db;
+    &.expanded {
+      width: 250px;
+      max-width: 30vw;
+    }
+    > ul {
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+      margin: 0;
+      width: 100%;
+    }
   }
 
   .dropdown-menu {
@@ -165,13 +108,9 @@
     font-size: 14px;
     text-decoration: none;
     -webkit-transform: translateZ(0) scale(1, 1);
-    -webkit-transition: all .1s linear;
-    transition: all .1s linear;
+    -webkit-transition: all 0.1s linear;
+    transition: all 0.1s linear;
     text-align: center;
-  }
-
-  .dropdown:hover .dropdown-menu {
-    display: block;
   }
 
   nav {
@@ -181,5 +120,4 @@
     -o-user-select: none;
     user-select: none;
   }
-
 </style>

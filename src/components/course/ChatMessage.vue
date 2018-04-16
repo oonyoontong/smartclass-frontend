@@ -35,7 +35,7 @@
 
 </script>
 
-<style>
+<style scoped>
   #ChatBox .Message {
     background: white;
     overflow: hidden;

@@ -71,7 +71,7 @@
   }
 </script>
 
-<style>
+<style scoped>
   #ChatBox {
     display: grid;
     grid-template-areas:

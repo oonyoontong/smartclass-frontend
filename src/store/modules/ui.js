@@ -1,5 +1,5 @@
 const state = {
-
+  isPlatformMobile: false,
 }
 
 const getters = {
