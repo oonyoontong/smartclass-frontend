@@ -25,6 +25,7 @@
 
     methods: {
       upVote(event){
+        console.log("SENDING UPVOTE")
         this.$socket.emit('upvote', this.data)
       }
 

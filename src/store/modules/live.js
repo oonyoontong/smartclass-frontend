@@ -26,9 +26,6 @@ const mutations = {
     } else {
       state.liveList = payload;
     }
-
-    console.log("live list setted!!!");
-    console.log(state.liveList)
   }
 };
 
@@ -47,7 +44,6 @@ const actions = {
         const liveList = response.data
         commit('SET_LIVE_LIST', liveList)
         console.log("liveList from server")
-        console.log(liveList)
       })
   }
 };
