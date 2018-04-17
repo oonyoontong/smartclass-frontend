@@ -24,25 +24,52 @@
       Lecture
     },
     props: [
-      'courseId',
-      'lectureId'
+      'courseId'
     ],
     computed: {
-      activeCourse: function() {
+      activeCourse: function () {
         return this.$store.state.course.activeCourse
+      },
+      coursesLoaded: function () {
+        return this.$store.state.course.coursesLoaded
       }
     },
     watch: {
       activeCourse(courseId) {
         this.updateLectures(courseId)
-      }
+      },
     },
-     mounted() {
+    mounted() {
       this.updateLectures(this.courseId)
+      this.updateActiveCourse()
+    },
+    beforeRouteEnter(to, from, next) {
+      next(vm => {
+        setTimeout(() => {
+          next()
+        }, 1000)
+      })
+    },
+    beforeRouteUpdate(to, from, next) {
+      console.log("UPDATING")
+      next()
     },
     methods: {
-      updateLectures: function () {
-        this.$store.dispatch('visiblePreviews', this.courseId)
+      updateLectures: function (courseId) {
+        this.$store.dispatch('visiblePreviews', courseId)
+      },
+      updateActiveCourse: function () {
+        if (this.courseId) {
+          this.$store.commit('activeCourse', this.courseId)
+        }
+      },
+      checkCoursesLoaded: (to, from, next) => {
+        if(this.coursesLoaded){
+          console.log("LOADED")
+        }
+        else {
+          console.log("LOADED")
+        }
       }
     },
   }

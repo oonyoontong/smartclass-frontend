@@ -10,22 +10,23 @@
 </template>
 
 <script>
-  import Sidebar from './bars/Sidebar'
-  import Headerbar from './bars/Headerbar'
-  import Rightbar from './bars/Rightbar'
+  import sidebar from './bars/Sidebar'
+  import headerbar from './bars/Headerbar'
+  import rightbar from './bars/Rightbar'
 
   export default {
     name: "Dash",
-    // beforeRouteEnter: console.log(store.courseList),
     computed: {
     },
     components: {
-      Headerbar,
-      Sidebar,
-      Rightbar
+      sidebar,
+      headerbar,
+      rightbar
     },
     beforeCreate() {
-      // this.$store.dispatch('registeredCourses')
+      this.$store.dispatch('registeredCourses')
+
+      // this.$store.dispatch('visiblePreviews')
     }
   }
 </script>

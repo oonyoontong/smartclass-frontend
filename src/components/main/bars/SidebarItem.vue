@@ -49,8 +49,8 @@
         console.log("Dropdown state: ", this.dropdownActive)
       },
       setActiveCourse: function(courseId) {
-          this.$store.state.course.activeCourse = courseId
-          console.log("SETTING ACTIVE COURSE")
+        // this.$store.commit('activeCourse', courseId)
+        console.log("SETTING ACTIVE COURSE")
       }
     },
     computed: {

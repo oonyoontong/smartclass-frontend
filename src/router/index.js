@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import auth from '../scripts/auth'
+import {store} from '../store/index'
 import Login from '@/components/Login'
 import Dash from '@/components/main/Dash'
 import Course from '@/components/course/Course'
@@ -34,7 +35,7 @@ export default new Router({
           props: true,
           children: [
             {
-              path: ':courseId'
+              path: ':courseId',
             }
           ]
         },

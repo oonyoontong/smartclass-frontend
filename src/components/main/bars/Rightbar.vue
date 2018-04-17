@@ -11,4 +11,7 @@
 </script>
 
 <style scoped>
+  #rightbar{
+    /*overflow: scroll;*/
+  }
 </style>

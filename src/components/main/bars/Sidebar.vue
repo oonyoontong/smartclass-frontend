@@ -7,10 +7,6 @@
       </li>
 
       <li>
-        <sidebar-item :icon='"fa-pencil-alt"' :text='"Quiz"' :url='"/quiz"' :sidebar-hover='sidebarHover'/>
-      </li>
-
-      <li>
         <sidebar-item :icon='"fa-bullhorn"' :text='"Announcements"' :url='"/announcements"'
                       :sidebar-hover='sidebarHover'/>
       </li>
