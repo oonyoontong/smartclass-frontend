@@ -33,6 +33,7 @@
         this.$store.commit('SOCKET_ADD_LIVE_QUESTION',message)
       },
       'upvote received': function (message) {
+        console.log("upvote received");
         this.$store.dispatch("fetchLiveList", this.$route.params['lectureId']);
       }
     },
@@ -76,7 +77,7 @@
     grid-template-areas:
       "questions"
       "input";
-    grid-template-rows: 82vh auto;
+    grid-template-rows: 200px 8vh;
     width: 100%;
     height: 100%;
     margin-right: 0;
@@ -102,6 +103,7 @@
   .ChatBox__List {
     overflow: scroll;
     grid-area: questions;
+
   }
 
   .ChatBox__Input {
