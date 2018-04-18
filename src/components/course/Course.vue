@@ -28,7 +28,7 @@
     ],
     computed: {
       activeCourse: function () {
-        return this.$store.state.course.activeCourse
+        return this.$route.params.courseId
       },
       coursesLoaded: function () {
         return this.$store.state.course.coursesLoaded
@@ -68,7 +68,7 @@
           console.log("LOADED")
         }
         else {
-          console.log("LOADED")
+          console.log("NOT LOADED")
         }
       }
     },

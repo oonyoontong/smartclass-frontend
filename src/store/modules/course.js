@@ -75,13 +75,18 @@ const mutations = {
   visiblePreviews: (state, payload) => {
     state.visiblePreviews = payload
   },
+  activeCourse: (state, payload) => {
+    state.activeCourse = payload
+  },
+  coursesLoaded: (state) => {
+    state.coursesLoaded = true
+  }
 }
 
 const actions = {
   async registeredCourses({commit, state, rootState, getters}) {
     return axios.get(rootState.backendUrl + 'course')
       .then(response => {
-        console.log("HANDLING RESPONSE 1")
         const courses = response.data.reduce((result, course) => {
           result[course.courseId] = course
           return result
@@ -89,7 +94,6 @@ const actions = {
         commit('registeredCourses', courses)
         return axios.get(rootState.backendUrl + 'lecture')
           .then(response => {
-            console.log("HANDLING RESPONSE 2")
             const allLectures = response.data
             allLectures.forEach(lecture => {
               const course = state.registeredCourses[getters.courseIdFromUniqueId[lecture.courseId]]
@@ -111,7 +115,6 @@ const actions = {
   },
   async visiblePreviews({dispatch, commit, state, getters, rootState}, courseId) {
     if (!state.coursesLoaded) await dispatch('registeredCourses')
-    console.log("HANDLING RESPONSE 3")
 
     const localLectures = state.registeredCourses[courseId].lectures
     const localLectureMap = new Map()
