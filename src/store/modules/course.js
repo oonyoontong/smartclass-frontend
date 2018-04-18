@@ -75,19 +75,13 @@ const mutations = {
   visiblePreviews: (state, payload) => {
     state.visiblePreviews = payload
   },
-  activeCourse: (state, payload) => {
-    console.log("SETTING ACTIVE COURSE TO: ", payload)
-    state.activeCourse = payload
-  },
-  coursesLoaded: (state) => {
-    state.coursesLoaded = true
-  }
 }
 
 const actions = {
   async registeredCourses({commit, state, rootState, getters}) {
     return axios.get(rootState.backendUrl + 'course')
       .then(response => {
+        console.log("HANDLING RESPONSE 1")
         const courses = response.data.reduce((result, course) => {
           result[course.courseId] = course
           return result
@@ -95,6 +89,7 @@ const actions = {
         commit('registeredCourses', courses)
         return axios.get(rootState.backendUrl + 'lecture')
           .then(response => {
+            console.log("HANDLING RESPONSE 2")
             const allLectures = response.data
             allLectures.forEach(lecture => {
               const course = state.registeredCourses[getters.courseIdFromUniqueId[lecture.courseId]]
@@ -114,26 +109,26 @@ const actions = {
         console.log("ERROR: ", response)
       })
   },
-  async visiblePreviews({dispatch, commit, state, getters, rootState}) {
-    // if (!state.coursesLoaded) await dispatch('registeredCourses')
-    if (state.activeCourse !== "all") {
-      const localLectures = state.registeredCourses[state.activeCourse].lectures
-      const localLectureMap = new Map()
-      Object.keys(localLectures).forEach(key => {
-        localLectureMap.set(key, localLectures[key])
-      })
-      const localLectureList = Array.from(localLectureMap.values())
-      localLectureList.forEach(lecture => {
-        lecture.name = lecture.lectureName
-        delete lecture.lectureName
-        if (!lecture.previewImageUrl) lecture.previewImageUrl = state.defaultPreviewImageUrl
-      })
-      console.log('Fetched ' + localLectureList.length + ' lectures: ', localLectureList)
-      commit('visiblePreviews', localLectureList)
-    }
-    else {
-      console.log("ACTIVE COURSES IS ALL")
-    }
+  async visiblePreviews({dispatch, commit, state, getters, rootState}, courseId) {
+    if (!state.coursesLoaded) await dispatch('registeredCourses')
+    console.log("HANDLING RESPONSE 3")
+
+    const localLectures = state.registeredCourses[courseId].lectures
+    const localLectureMap = new Map()
+
+    Object.keys(localLectures).forEach(key => {
+      localLectureMap.set(key, localLectures[key])
+    })
+    const localLectureList = Array.from(localLectureMap.values())
+
+    // const lectures = response.data.lectures
+    localLectureList.forEach(lecture => {
+      lecture.name = lecture.lectureName
+      delete lecture.lectureName
+      if (!lecture.previewImageUrl) lecture.previewImageUrl = state.defaultPreviewImageUrl
+    })
+    console.log('Fetched ' + localLectureList.length + ' lectures: ', localLectureList)
+    commit('visiblePreviews', localLectureList)
   }
 }
 

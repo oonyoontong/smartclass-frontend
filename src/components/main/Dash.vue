@@ -10,23 +10,22 @@
 </template>
 
 <script>
-  import sidebar from './bars/Sidebar'
-  import headerbar from './bars/Headerbar'
-  import rightbar from './bars/Rightbar'
+  import Sidebar from './bars/Sidebar'
+  import Headerbar from './bars/Headerbar'
+  import Rightbar from './bars/Rightbar'
 
   export default {
     name: "Dash",
+    // beforeRouteEnter: console.log(store.courseList),
     computed: {
     },
     components: {
-      sidebar,
-      headerbar,
-      rightbar
+      Headerbar,
+      Sidebar,
+      Rightbar
     },
     beforeCreate() {
-      this.$store.dispatch('registeredCourses')
-
-      // this.$store.dispatch('visiblePreviews')
+      // this.$store.dispatch('registeredCourses')
     }
   }
 </script>
@@ -75,3 +74,8 @@
     src: local('Titillium WebLight'), local('TitilliumWeb-Light'), url(http://themes.googleusercontent.com/static/fonts/titilliumweb/v2/anMUvcNT0H1YN4FII8wpr24bNCNEoFTpS2BTjF6FB5E.woff) format('woff');
   }
 </style>
+
+2 file changes in working directory
+View changes
+commit:ebad47
+Instant Preview Loading
