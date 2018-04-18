@@ -102,7 +102,7 @@ const actions = {
                 course.lectures = {}
               }
               course.lectures[lecture._id] = lecture
-            })
+            });
             commit('coursesLoaded')
             console.log("Fetched courses:", courses)
           })

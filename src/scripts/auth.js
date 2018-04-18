@@ -7,7 +7,12 @@ export default {
     cb = arguments[arguments.length - 1];
     LoginRequest(username, pass, (res) => {
       if (res.authenticated) {
-        console.log('Authenticated: ' + res.authenticated)
+        console.log('Authenticated: ' + res.authenticated);
+        delete res.account.passwordHash;
+        delete res.account.passwordSalt;
+        delete res.account._v;
+        store.state.account = res.account;
+        console.log(store.state.account);
         localStorage.token = res.token;
         if (cb) cb(true)
         this.onChange(true)

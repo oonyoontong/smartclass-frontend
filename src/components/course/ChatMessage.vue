@@ -19,7 +19,7 @@
     props: ['data'],
     computed: {
       upvoteSubmitted: () => {
-        return false;
+        return this.data.upvoted.contains($store.state.account._id)
       }
     },
 

@@ -1,7 +1,5 @@
 const state = {
-  username: null,
-  authLevel: null
-}
+};
 
 const getters = {
 
