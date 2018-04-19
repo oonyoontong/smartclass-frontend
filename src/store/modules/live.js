@@ -44,6 +44,7 @@ const actions = {
         const liveList = response.data
         commit('SET_LIVE_LIST', liveList)
         console.log("liveList from server")
+        console.log(liveList);
       })
   }
 };

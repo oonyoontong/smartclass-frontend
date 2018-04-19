@@ -13,7 +13,8 @@ export default {
         delete res.account._v;
         store.state.account = res.account;
         console.log(store.state.account);
-        localStorage.token = res.token;
+        localStorage.token = res.account._id;
+        localStorage.privilege = res.account.privilege;
         if (cb) cb(true)
         this.onChange(true)
       } else {
@@ -25,6 +26,10 @@ export default {
 
   getToken() {
     return localStorage.token
+  },
+
+  getPrivilege(){
+    return localStorage.privilege;
   },
 
   logout(cb) {

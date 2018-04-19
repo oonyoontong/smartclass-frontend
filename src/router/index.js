@@ -14,8 +14,11 @@ import Statistics from '@/components/Statistics'
 import Settings from '@/components/settings/Settings'
 import Profile from '@/components/settings/Profile'
 import NotFound from '@/components/404'
+import DashAdmin from '@/components/admin/DashAdmin'
+import CourseList from '@/components/admin/CourseList'
+import LectureList from '@/components/admin/LectureList'
 
-Vue.use(Router)
+  Vue.use(Router)
 
 export default new Router({
   mode: 'history',
@@ -85,6 +88,34 @@ export default new Router({
           next()
         }
       }
+    },
+    {
+      path: '/admin',
+      component: DashAdmin,
+      beforeEnter(to, from, next) {
+        console.log("Checking privilege "+ localStorage.privilege);
+        if (localStorage.privilege != 2) {
+          next()
+        } else {
+          next('/');
+        }
+      },
+      children: [
+        {
+          path: '/',
+          component: CourseList,
+          props: true,
+          children: [
+
+          ]
+        },
+        {
+          path: ':courseId',
+          component: LectureList
+        }
+
+      ]
+
     },
     {
       path: '/logout',

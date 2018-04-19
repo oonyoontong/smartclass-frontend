@@ -35,6 +35,7 @@
       'upvote received': function (message) {
         console.log("upvote received");
         this.$store.dispatch("fetchLiveList", this.$route.params['lectureId']);
+        console.log(this.$store.getters.getLiveList);
       }
     },
     methods: {
@@ -59,7 +60,6 @@
     mounted(){
       this.$socket.emit("room", this.$route.params['lectureId'])
       this.$store.dispatch("fetchLiveList", this.$route.params['lectureId']);
-      console.log(this.$store)
     },
     created(){
       console.log(this.$route.params)

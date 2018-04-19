@@ -9,7 +9,7 @@
         {{ data.question }}
       </p>
 
-      <button v-on:click="upVote" :disabled="upvoteSubmitted">upvote</button>
+      <button v-on:click="upVote" :disabled="!data.upvoted.indexOf(accountId) || clicked">upvote</button>
     </div>
   </div>
 </template>
@@ -17,16 +17,28 @@
 <script>
   export default {
     props: ['data'],
+    data: function(){
+      return {
+        liveData: this.data,
+        accountId: localStorage.token,
+        clicked: false
+      }
+    },
     computed: {
       upvoteSubmitted: () => {
-        return this.data.upvoted.contains($store.state.account._id)
+        console.log("Is this even working");
+        console.log(this.data);
       }
     },
 
     methods: {
       upVote(event){
         console.log("SENDING UPVOTE")
-        this.$socket.emit('upvote', this.data)
+        this.data['accountId'] = localStorage.token
+        console.log(localStorage.token);
+        this.$socket.emit('upvote', this.data);
+        this.clicked = true;
+        console.log("clicked =" + this.clicked);
       }
 
     }

@@ -5,6 +5,11 @@
         <img src="../../../assets/app-icon.png" height="35" width="35" id="logo-main">
         <span class="hover" style="padding-left: 10px; color: #fff;">Smart Class</span>
       </router-link>
+
+      <router-link to="/admin" class="navbar-brand">
+        <span class="hover" style="padding-left: 10px; color: #fff;">Admin</span>
+      </router-link>
+
       <a href="/" v-on:click="redirectLogout" class="navbar-brand">
         <i class="fas fa-power-off fa-lg" id="logout-icon" title="Logout"></i>
       </a>
