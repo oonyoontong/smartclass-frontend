@@ -10,6 +10,7 @@ import lecture from './modules/lecture'
 import quiz from './modules/quiz'
 import ui from './modules/ui'
 import live from './modules/live'
+import feedback from "./modules/feedback"
 
 Vue.use(Vuex);
 
@@ -20,7 +21,8 @@ export const store = new Vuex.Store({
     lecture,
     quiz,
     ui,
-    live
+    live,
+    feedback
   },
   state,
   mutations

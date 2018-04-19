@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex flex-row list-group-item justify-content-between">
+  <li class="d-flex flex-row list-group-item justify-content-between">
     <div>
     </div>
     <router-link :to="path">
@@ -16,7 +16,7 @@
       x
     </button>
     </div>
-  </div>
+  </li>
 </template>
 
 <script>

@@ -17,6 +17,7 @@ import NotFound from '@/components/404'
 import DashAdmin from '@/components/admin/DashAdmin'
 import CourseList from '@/components/admin/CourseList'
 import LectureList from '@/components/admin/LectureList'
+import LectureChildList from '@/components/admin/LectureChildList'
 
   Vue.use(Router)
 
@@ -135,7 +136,13 @@ export default new Router({
           path: ':courseId',
           component: LectureList,
           props: true
+        },
+        {
+          path: ':courseId/:lectureId',
+          component: LectureChildList,
+          props: true
         }
+
 
       ]
 

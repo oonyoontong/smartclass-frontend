@@ -15,7 +15,7 @@
     <lecture-modal v-show="isModalVisible" @close="closeModal"/>
 
     <div class="list-group">
-      <lecture-item v-for="lecture in lectures" v-bind:data="lecture" :key="lecture._id"></lecture-item>
+      <lecture-item v-for="lecture in $store.state.course.registeredCourses[this.courseId].lectures" v-bind:data="lecture" :key="lecture._id"></lecture-item>
     </div>
   </div>
 </template>
@@ -63,8 +63,10 @@
       },
       closeModal() {
         this.isModalVisible = false;
+        this.updateView();
       },
       updateView() {
+        console.log("Updating....");
         const course = this.$store.state.course.registeredCourses[this.courseId]
         this.courseName = course.courseId + " " + course.courseName
         this.lectures = this.$store.state.course.registeredCourses[this.courseId].lectures
@@ -72,13 +74,6 @@
     }
   }
 
-  function findElement(arr, propName, propValue) {
-    for (var i = 0; i < arr.length; i++)
-      if (arr[i][propName] == propValue)
-        return arr[i];
-
-    // will return undefined if not found; you could return a default instead
-  }
 </script>
 
 <style scoped>

@@ -40,6 +40,8 @@ const actions = {
       .then(response => {
         const liveList = response.data
         commit('SET_LIVE_LIST', liveList)
+        console.log("liveList found");
+        console.log(liveList);
       })
   }
 }

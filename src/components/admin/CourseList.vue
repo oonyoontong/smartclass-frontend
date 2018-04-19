@@ -4,7 +4,7 @@
     <div class="row">
       <div class="col-md-12">
         <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-          <a class="navbar-brand" href="#">Course</a>
+          <a class="navbar-brand" href="#">Courses</a>
           <button
             type="button"
             class="btn"
