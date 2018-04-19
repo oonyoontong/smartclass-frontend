@@ -3,7 +3,7 @@
     <div class="container-fluid">
       <router-link to='/' class="navbar-brand" id="logo-container">
         <img src="../../../assets/app-icon.png" height="35" width="35" id="logo-main">
-        <span class="hover" style="padding-left: 10px; color: #fff;">Smart Class</span>
+        <span class="hover" style="padding-left: 10px; color: #fff;">GoClassLah</span>
       </router-link>
 
       <router-link to="/admin" class="navbar-brand">

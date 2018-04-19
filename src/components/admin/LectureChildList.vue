@@ -17,20 +17,22 @@
         </div>
       </div>
     </div>
-  <!--  <lecture-modal v-show="isModalVisible" @close="closeModal"/>
--->
+    <quiz-modal
+      v-show="isModalVisible"
+      @close="closeModal"
+    />
     <div class="container-fluid">
       <div class = "row">
         <div class="col-sm list-group">
           <div class = "list-group-item active">Live Questions</div>
-          <live-item v-for="live in $store.getters.getLiveList" v-bind:live="live" :key = "live._id"></live-item>
+          <live-item v-on:updateView = "updateView" v-for="live in $store.getters.getLiveList" v-bind:live="live" :key = "live._id"></live-item>
         </div>
         <div class="col-sm list-group">
           <div class = "list-group-item active">Quizzes</div>
         </div>
         <div class="col-sm list-group">
           <div class = "list-group-item active">Feedback</div>
-          <feedback-item v-for = "feedback in $store.state.feedback.feedbackList" v-bind:feedback = "feedback" :key = "feedback._id"></feedback-item>
+          <feedback-item v-on:updateView = "updateView" v-for = "feedback in $store.state.feedback.feedbackList" v-bind:feedback = "feedback" :key = "feedback._id"></feedback-item>
         </div>
       </div>
 
@@ -42,12 +44,15 @@
   import { mapGetters } from 'vuex'
   import LiveItem from "./LiveItem"
   import FeedbackItem from "./FeedbackItem"
+  import QuizModal from "./modal/QuizModal"
 
   export default {
     name: "lecture-child-list",
     components: {
       FeedbackItem,
-      LiveItem},
+      LiveItem,
+      QuizModal
+    },
     data() {
       return {
         isModalVisible: false,

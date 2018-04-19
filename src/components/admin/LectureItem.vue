@@ -46,7 +46,7 @@
             console.log(response.data);
             console.log("lecture deleted!")
             this.$store.dispatch('registeredCourses');
-            this.$emit(updateView);
+            this.$emit("updateView");
           })
       }
     }

@@ -50,6 +50,7 @@
             console.log(response.live);
             console.log("live deleted!")
             this.$store.dispatch('registeredCourses');
+            this.$emit("updateView");
           })
       }
     }

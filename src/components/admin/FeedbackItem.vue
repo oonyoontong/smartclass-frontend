@@ -52,6 +52,7 @@
             console.log(response.feedback);
             console.log("feedback deleted!")
             this.$store.dispatch('registeredCourses');
+            this.$emit("updateView");
           })
       }
     }

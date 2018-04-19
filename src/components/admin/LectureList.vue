@@ -15,7 +15,7 @@
     <lecture-modal v-show="isModalVisible" @close="closeModal"/>
 
     <div class="list-group">
-      <lecture-item v-for="lecture in $store.state.course.registeredCourses[this.courseId].lectures" v-bind:data="lecture" :key="lecture._id"></lecture-item>
+      <lecture-item @updateView="updateView" v-for="lecture in $store.state.course.registeredCourses[this.courseId].lectures" v-bind:data="lecture" :key="lecture._id"></lecture-item>
     </div>
   </div>
 </template>
