@@ -23,7 +23,7 @@
     props: [
       'courseId',
       'lectureId',
-      'quizId'
+      'quiz'
     ],
     computed: {
       question: function(){

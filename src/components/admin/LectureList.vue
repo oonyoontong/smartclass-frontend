@@ -52,10 +52,6 @@
       ...mapGetters({
         coursesLoaded: 'coursesLoaded'
       })
-      // courseName: function () {
-      //   const course = this.$store.state.course.registeredCourses[this.courseId]
-      //   return course.courseId + " " + course.courseName;
-      // }
     },
     methods: {
       showModal() {
