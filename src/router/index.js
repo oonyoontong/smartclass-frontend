@@ -59,8 +59,7 @@ export default new Router({
             default: Quiz
           },
           props: {
-            default: true,
-            rightbar: true
+            default: true
           }
         },
         {

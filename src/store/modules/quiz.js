@@ -1,42 +1,45 @@
+import axios from 'axios';
+
 const state = {
-  quizContent: [],
-  activeQuizId: null
+  quizContent: {},
+  activeQuiz: null
 }
 
 const getters = {
-  questionNumber(state, number) {
-    return state.quizContent[number]
+  questionNumber(state) {
+      return function(number) {
+        if(number > 0){
+          return state.quizContent.questions[number-1]
+        }
+        else{
+          console.log("INVALID QUESTION NUMBER, MUST BE >0")
+        }
+      }
+  },
+  question(state) {
+    return state.quizContent.question
   }
 }
 
 const mutations = {
-  setQuizContent(state, {quizId, quizContent}) {
-    state.activeQuizId = quizId
+  quizContent(state, quizContent) {
     state.quizContent = quizContent
+  },
+  activeQuiz(state, payload) {
+    state.activeQuiz = payload
   }
 }
 
 const actions = {
-  getQuizContentById: ({commit, state, rootState}, quizId) => {
-    // TODO: replace with axios/getQuizById
-    const quizContent = {
-      number: 1,
-      type: "mcq",
-      questionTitle: "Important question",
-      questionText: "What does TD in SUTD stand for?",
-      options: [
-        "Technology Design",
-        "Technology and Design",
-        "It's a trick question",
-        "Technical Difficulties",
-        "Why do I have to answer this wtf"
-      ],
-      response: null  // create this property locally
-    }
-    commit('setQuizContent', quizContent)
-  },
-  submitQuestion: ({commit, state, rootState}, {number, response}) => {
-
+  async quizContent({commit, state, rootState}, quizId) {
+    console.log("Getting Quiz:", quizId)
+    return axios.post(rootState.backendUrl + 'quiz', {quizId: quizId})
+      .then(response => {
+        commit('quizContent', response.data)
+      })
+      .catch(error => {
+        console.log(error)
+      })
   },
   submitQuiz({commit, state, rootState}) {
 

@@ -48,7 +48,6 @@
       })
     },
     mounted() {
-      console.log(this.visiblePreviews)
       this.$store.dispatch('visiblePreviews', this.activeCourse)
     },
     beforeRouteUpdate(to, from, next) {

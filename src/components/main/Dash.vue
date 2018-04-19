@@ -45,6 +45,7 @@
   .headerbar {
     position: relative;
     grid-area: header;
+    padding: 0;
     z-index: 20;
   }
 

@@ -1,5 +1,4 @@
 import axios from 'axios';
-import lecture from "./lecture";
 
 axios.interceptors.request.use(request => {
   // console.log('Sending request: ', request)

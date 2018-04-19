@@ -29,7 +29,7 @@
     ],
     sockets: {
       'message received': function (message) {
-        console.log("message received " + message);
+        console.log("message received ", message);
         this.$store.commit('SOCKET_ADD_LIVE_QUESTION',message)
       },
       'upvote received': function (message) {
@@ -49,7 +49,6 @@
         this.$socket.emit('send message', payload)
         this.newMessage = ''
       },
-
     },
     computed: {
       // TODO: Surely there must be a better way to do this?
@@ -62,12 +61,10 @@
       this.$store.dispatch("fetchLiveList", this.$route.params['lectureId']);
     },
     created(){
-      console.log(this.$route.params)
     },
     beforeDestroy(){
       this.$socket.emit("leave room","leave room")
     }
-
   }
 </script>
 

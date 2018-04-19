@@ -1,5 +1,4 @@
 import axios from 'axios';
-import quiz from "./quiz";
 
 const state = {
   activeLecture: null,
@@ -30,11 +29,11 @@ const mutations = {
 
 const actions = {
   async quizIds({state, rootState, commit, dispatch}, {courseId, lectureId}) {
-    if(!rootState.course.coursesLoaded) await dispatch('registeredCourses').then(response => {
+    // if(!rootState.course.coursesLoaded) await dispatch('registeredCourses').then(response => {
       const quizzes = rootState.course.registeredCourses[courseId].lectures[lectureId].quiz
       commit('quizIds', quizzes)
       console.log("QUIZZES: ", quizzes)
-    })
+    // })
   }
 }
 
