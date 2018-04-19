@@ -25,7 +25,7 @@
       Rightbar
     },
     beforeCreate() {
-      this.$store.dispatch('visiblePreviews')
+      this.$store.dispatch('registeredCourses')
     }
   }
 </script>

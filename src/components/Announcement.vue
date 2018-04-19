@@ -20,6 +20,9 @@
 <script>
   export default {
     name: "announcement-view",
+    props: [
+      'courseId'
+    ]
   }
 </script>
 

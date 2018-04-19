@@ -7,7 +7,7 @@
 
     <ul class="dropdown-menu" :class='{active: dropdownActive}' role="menu" v-if="subItems">
       <li v-for="subItem in subItems">
-        <router-link :to=subItem.url v-if='text==="Courses"' v-on:click.native='setActiveCourse(subItem.id)'>
+        <router-link :to=subItem.url v-if='text==="Courses"'>
           <span class="nav-text">{{subItem.text}}</span>
         </router-link>
         <router-link :to=subItem.url v-else>
@@ -48,10 +48,6 @@
         this.dropdownActive = !this.dropdownActive
         console.log("Dropdown state: ", this.dropdownActive)
       },
-      setActiveCourse: function(courseId) {
-        // this.$store.commit('activeCourse', courseId)
-        console.log("SETTING ACTIVE COURSE")
-      }
     },
     computed: {
     },
