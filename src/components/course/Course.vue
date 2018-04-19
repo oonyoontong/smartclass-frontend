@@ -2,11 +2,10 @@
   <div id="courses">
     <div id="courses-content">
       <ul class="preview-container">
-        <li v-for="preview in $store.state.course.visiblePreviews" class="lecture-preview-item">
+        <li v-for="preview in visiblePreviews" class="lecture-preview-item">
           <item-preview :previewInfo=preview />
         </li>
       </ul>
-      <!--<button v-on:click.prevent="updateLectures">Fetch lectures</button>-->
       <h1>Course id: {{courseId}}</h1>
     </div>
   </div>
@@ -14,6 +13,7 @@
 
 <script>
   //TODO: PULL LECTURES FROM SERVER, SORT BY QUERY
+  import {store} from '@/store/index'
   import ItemPreview from './CourseItemPreview'
   import Lecture from './Lecture'
 
@@ -23,6 +23,9 @@
       ItemPreview,
       Lecture
     },
+    data(){
+      return {}
+    },
     props: [
       'courseId'
     ],
@@ -30,39 +33,31 @@
       activeCourse: function () {
         return this.$route.params.courseId
       },
+      visiblePreviews: function() {
+        return this.$store.state.course.visiblePreviews
+      },
       coursesLoaded: function () {
         return this.$store.state.course.coursesLoaded
       }
     },
     watch: {
-      activeCourse(courseId) {
-        this.$store.dispatch('visiblePreviews', courseId)
-      },
-    },
-    mounted() {
-      this.$store.dispatch('visiblePreviews', courseId)
-      this.updateActiveCourse()
     },
     beforeRouteEnter(to, from, next) {
-      next(vm => {
-        setTimeout(() => {
-          next()
-        }, 1000)
+      store.dispatch('visiblePreviews').then(response => {
+        next()
       })
     },
+    mounted() {
+      console.log(this.visiblePreviews)
+      this.$store.dispatch('visiblePreviews', this.activeCourse)
+    },
     beforeRouteUpdate(to, from, next) {
-      console.log("UPDATING")
-      next()
+      console.log("UPDATING ROUTE")
+      this.$store.dispatch('visiblePreviews', to.params.courseId).then(response => {
+        next()
+      })
     },
     methods: {
-      updateLectures: function (courseId) {
-        this.$store.dispatch('visiblePreviews', courseId)
-      },
-      updateActiveCourse: function () {
-        if (this.courseId) {
-          this.$store.commit('activeCourse', this.courseId)
-        }
-      },
       checkCoursesLoaded: (to, from, next) => {
         if(this.coursesLoaded){
           console.log("LOADED")

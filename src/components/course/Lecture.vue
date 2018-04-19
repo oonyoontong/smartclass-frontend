@@ -3,36 +3,44 @@
     <div id="lecture-header">
       <span>Lecture ID: {{lectureId}}</span>
       <div id="quiz-btn-group" class="btn-group">
-        <button class="btn btn-primary dropdown-toggle" id="quiz-button" data-toggle="dropdown">Go to Quiz</button>
-        <ul class="dropdown-menu">
-          <li><a href="#">Action</a></li>
-          <li><a href="#">Another action</a></li>
-        </ul>
+        <button class="btn btn-primary" id="quiz-button">Go to Quiz</button>
       </div>
     </div>
     <div id="lecture-content">
       <pdf-view :lecture-url='"https://bitcoin.org/bitcoin.pdf"'></pdf-view>
+    </div>
+    <div id="quiz-wrapper">
+      <quiz :quiz-id='this.quizId'></quiz>
+    </div>
+    <div id="feedback-wrapper">
+      <lecture-feedback></lecture-feedback>
     </div>
   </div>
 </template>
 
 <script>
   import PdfView from './PdfView'
+  import lectureFeedback from './LectureFeedback'
+  import quiz from './Quiz'
 
   export default {
     name: "lecture",
     components: {
-      PdfView
+      PdfView,
+      lectureFeedback,
+      quiz
     },
     props: [
       'courseId',
       'lectureId'
     ],
+    computed:{
+      quizId: function() {
+        return this.$store.getters.quizId
+      }
+    },
     created(){
-      // set active lecture
-      // this.$store.commit('activeLecture', this.lectureId)
-      console.log("THIS: ", this.lectureId)
-      // get quiz list
+      this.$store.dispatch('quizIds', {courseId: this.courseId, lectureId: this.lectureId})
     }
   }
 </script>

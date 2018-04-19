@@ -5,7 +5,7 @@
         <img :src=previewInfo.previewImageUrl />
       </div>
       <div id="lecture-preview-text">
-        <span id="lecture-name">{{previewInfo.name}}</span>
+        <span id="lecture-name">{{previewInfo.lectureName}}</span>
       </div>
     </section>
   </router-link>

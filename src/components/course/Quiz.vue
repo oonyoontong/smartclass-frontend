@@ -1,8 +1,8 @@
 <template>
   <div id="dashboard">
-    <h1 v-if="quizId">
+    <h3 v-if="quizId">
       Quiz id: {{quizId}}
-    </h1>
+    </h3>
   </div>
 </template>
 
@@ -13,7 +13,10 @@
     },
     props: [
       'quizId'
-    ]
+    ],
+    created(){
+      console.log(this.quizId)
+    }
   }
 </script>
 

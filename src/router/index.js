@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import auth from '../scripts/auth'
-import {store} from '../store/index'
 import Login from '@/components/Login'
 import Dash from '@/components/main/Dash'
 import Course from '@/components/course/Course'
 import Lecture from '@/components/course/Lecture'
+import LectureFeedback from '@/components/course/LectureFeedback'
 import LiveQuestions from '@/components/course/LiveQuestions'
 import Quiz from '@/components/course/Quiz'
 import Announcement from '@/components/Announcement'
@@ -45,7 +45,31 @@ export default new Router({
             default: Lecture,
             rightbar: LiveQuestions
           },
-          props: {default: true, rightbar: true}
+          props: {
+            default: true,
+            rightbar: true
+          }
+        },
+        {
+          path: '/courses/:courseId/lecture/:lectureId/quiz/:quizId',
+          components: {
+            default: Quiz
+          },
+          props: {
+            default: true,
+            rightbar: true
+          }
+        },
+        {
+          path: '/courses/:courseId/lecture/:lectureId/feedback',
+          components: {
+            default: LectureFeedback,
+            rightbar: LiveQuestions
+          },
+          props: {
+            default: true,
+            rightbar: true
+          }
         },
         {
           path: '/announcements',

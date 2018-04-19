@@ -11,43 +11,7 @@ const state = {
   registeredCourses: {},
   coursesLoaded: false,
   activeCourse: "all",
-  visiblePreviews: [
-    {
-      courseId: "5ac3e2f453768d1d4c0330c3",
-      _id: "5acidjs89ds7fg6tnrgjn",
-      type: 'lecture',
-      name: "introduction",
-      previewImageUrl: "http://www.raisedeyebrow.com/sites/www.raisedeyebrow.com/files/blog/2012/01/fff.png"
-    },
-    {
-      courseId: "5ac3e2f453768d1d4c0330c3",
-      _id: "5acidjs234h34h2tn5rgjn",
-      type: 'quiz',
-      name: "quiz 1",
-      previewImageUrl: "http://www.raisedeyebrow.com/sites/www.raisedeyebrow.com/files/blog/2012/01/fff.png"
-    },
-    {
-      courseId: "5ac3e2f453768d1d4c0330c3",
-      _id: "5acidjs87ewhfy8htnrgjn",
-      type: 'lecture',
-      name: "cohort 1",
-      previewImageUrl: "http://www.raisedeyebrow.com/sites/www.raisedeyebrow.com/files/blog/2012/01/fff.png"
-    },
-    {
-      courseId: "5ac3e2f453768d1d4c0330c3",
-      _id: "5acidjsauhgwasdasdsdaan",
-      type: 'quiz',
-      name: "quiz 2",
-      previewImageUrl: "http://www.raisedeyebrow.com/sites/www.raisedeyebrow.com/files/blog/2012/01/fff.png"
-    },
-    {
-      courseId: "5ac3e2f453768d1d4c0330c3",
-      _id: "5acidjsa98dws7yf65asdas",
-      type: 'lecture',
-      name: "cohort 2",
-      previewImageUrl: "http://www.raisedeyebrow.com/sites/www.raisedeyebrow.com/files/blog/2012/01/fff.png"
-    }
-  ]
+  visiblePreviews: []
 }
 
 const getters = {
@@ -127,8 +91,6 @@ const actions = {
 
       // const lectures = response.data.lectures
       localLectureList.forEach(lecture => {
-        lecture.name = lecture.lectureName
-        delete lecture.lectureName
         if (!lecture.previewImageUrl) lecture.previewImageUrl = state.defaultPreviewImageUrl
       })
       console.log('Fetched ' + localLectureList.length + ' lectures: ', localLectureList)
