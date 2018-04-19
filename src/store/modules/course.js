@@ -29,6 +29,9 @@ const getters = {
       courseMap.set(key, state.registeredCourses[key])
     })
     return courseMap
+  },
+  coursesLoaded(state){
+    return state.coursesLoaded
   }
 }
 

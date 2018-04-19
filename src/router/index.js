@@ -130,12 +130,12 @@ export default new Router({
           component: CourseList,
           props: true,
           children: [
-
           ]
         },
         {
           path: ':courseId',
-          component: LectureList
+          component: LectureList,
+          props: true
         }
 
       ]
