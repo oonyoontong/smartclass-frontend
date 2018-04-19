@@ -33,7 +33,7 @@ const mutations = {
 const actions = {
   async quizContent({commit, state, rootState}, quizId) {
     console.log("Getting Quiz:", quizId)
-    return axios.post(rootState.backendUrl + 'quiz', {quizId: quizId})
+    return axios.post(rootState.backendUrl + 'quiz', {quiz: quizId})
       .then(response => {
         commit('quizContent', response.data)
       })

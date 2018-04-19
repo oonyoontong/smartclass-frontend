@@ -13,6 +13,7 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex'
   import PdfView from './PdfView'
 
   export default {
@@ -25,13 +26,26 @@
       'lectureId'
     ],
     computed: {
-      quizId: function () {
-        return this.$store.getters.quizId
+      ...mapGetters({
+        coursesLoaded: 'coursesLoaded'
+      }),
+      quiz: function () {
+        return this.$store.getters.quiz
+      }
+    },
+    mounted(){
+      if(this.coursesLoaded){
+        this.getQuizzes()
       }
     },
     watch: {
       '$store.state.course.coursesLoaded'(isLoaded){
-        this.$store.dispatch('quizIds', {courseId: this.courseId, lectureId: this.lectureId})
+        this.getQuizzes()
+      }
+    },
+    methods: {
+      getQuizzes(){
+        this.$store.dispatch('quizzes', {courseId: this.courseId, lectureId: this.lectureId})
       }
     }
   }

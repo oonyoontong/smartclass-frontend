@@ -23,7 +23,7 @@
       ItemPreview,
       Lecture
     },
-    data(){
+    data() {
       return {}
     },
     props: [
@@ -33,22 +33,21 @@
       activeCourse: function () {
         return this.$route.params.courseId
       },
-      visiblePreviews: function() {
+      visiblePreviews: function () {
         return this.$store.state.course.visiblePreviews
       },
       coursesLoaded: function () {
         return this.$store.state.course.coursesLoaded
       }
     },
-    watch: {
+    created() {
+      console.log(this.courseId)
+      this.$store.dispatch('visiblePreviews', this.courseId)
     },
     beforeRouteEnter(to, from, next) {
-      store.dispatch('visiblePreviews').then(response => {
+      store.dispatch('visiblePreviews', to.params.courseId).then(response => {
         next()
       })
-    },
-    mounted() {
-      this.$store.dispatch('visiblePreviews', this.activeCourse)
     },
     beforeRouteUpdate(to, from, next) {
       console.log("UPDATING ROUTE")
@@ -57,14 +56,6 @@
       })
     },
     methods: {
-      checkCoursesLoaded: (to, from, next) => {
-        if(this.coursesLoaded){
-          console.log("LOADED")
-        }
-        else {
-          console.log("NOT LOADED")
-        }
-      }
     },
   }
 </script>

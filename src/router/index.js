@@ -55,7 +55,7 @@ export default new Router({
           }
         },
         {
-          path: '/courses/:courseId/lecture/:lectureId/quiz/:quizId',
+          path: '/courses/:courseId/lecture/:lectureId/quiz/:quiz',
           components: {
             default: Quiz
           },

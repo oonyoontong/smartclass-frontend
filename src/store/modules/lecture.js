@@ -2,15 +2,15 @@ import axios from 'axios';
 
 const state = {
   activeLecture: null,
-  quizIds: [],
+  quizzes: [],
 }
 
 const getters = {
-  quizId: state => {
-    if(state.quizIds[0]){
-      return state.quizIds[0]
+  quiz: state => {
+    if (state.quizzes[0]) {
+      return state.quizzes[0]
     }
-    else{
+    else {
       return null
     }
   }
@@ -20,20 +20,18 @@ const mutations = {
   activeLecture: (state, payload) => {
     state.activeLecture = payload
   },
-  quizIds: (state, payload) => {
-    if(payload){
-      state.quizIds = payload
+  quizzes: (state, payload) => {
+    if (payload) {
+      state.quizzes = payload
     }
   }
 }
 
 const actions = {
-  async quizIds({state, rootState, commit, dispatch}, {courseId, lectureId}) {
-    // if(!rootState.course.coursesLoaded) await dispatch('registeredCourses').then(response => {
-      const quizzes = rootState.course.registeredCourses[courseId].lectures[lectureId].quiz
-      commit('quizIds', quizzes)
-      console.log("QUIZZES: ", quizzes)
-    // })
+  async quizzes({state, rootState, commit, dispatch}, {courseId, lectureId}) {
+    const quizzes = rootState.course.registeredCourses[courseId].lectures[lectureId].quiz
+    commit('quizzes', quizzes)
+    console.log("QUIZZES: ", quizzes)
   }
 }
 
