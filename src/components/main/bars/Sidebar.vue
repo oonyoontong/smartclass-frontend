@@ -40,9 +40,9 @@
         const ret = []
         this.$store.getters.registeredCoursesAsMap.forEach(course => {
           ret.push({
-            url: "/courses/" + course.courseId,
+            url: "/courses/" + course._id,
             text: course.courseName,
-            id: course.courseId
+            id: course._id
           })
         })
         return ret

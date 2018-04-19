@@ -1,10 +1,16 @@
 <template>
   <div id="lecture-wrapper">
     <div id="lecture-header">
-      <button id="quiz-button">Go to Quiz</button>
+      <span>Lecture ID: {{lectureId}}</span>
+      <div id="quiz-btn-group" class="btn-group">
+        <button class="btn btn-primary dropdown-toggle" id="quiz-button" data-toggle="dropdown">Go to Quiz</button>
+        <ul class="dropdown-menu">
+          <li><a href="#">Action</a></li>
+          <li><a href="#">Another action</a></li>
+        </ul>
+      </div>
     </div>
     <div id="lecture-content">
-      <!--<h3>Lecture ID: {{lectureId}}</h3>-->
       <pdf-view :lecture-url='"https://bitcoin.org/bitcoin.pdf"'></pdf-view>
     </div>
   </div>
@@ -19,6 +25,7 @@
       PdfView
     },
     props: [
+      'courseId',
       'lectureId'
     ],
     created(){

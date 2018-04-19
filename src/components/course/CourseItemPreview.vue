@@ -20,6 +20,9 @@
     computed: {
       url(){
         return '/courses/' + this.previewInfo.courseId + '/lecture/' + this.previewInfo._id
+      },
+      courseId(){
+        return this.$store.getters.courseIdFromUniqueId[this.previewInfo.courseId]
       }
     }
   }

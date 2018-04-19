@@ -88,7 +88,7 @@ const actions = {
     return axios.get(rootState.backendUrl + 'course')
       .then(response => {
         const courses = response.data.reduce((result, course) => {
-          result[course.courseId] = course
+          result[course._id] = course
           return result
         }, {})
         commit('registeredCourses', courses)
@@ -96,7 +96,7 @@ const actions = {
           .then(response => {
             const allLectures = response.data
             allLectures.forEach(lecture => {
-              const course = state.registeredCourses[getters.courseIdFromUniqueId[lecture.courseId]]
+              const course = state.registeredCourses[lecture.courseId]
               if (course.lectures instanceof Array) {
                 course.lectures = {}
               }
@@ -113,25 +113,27 @@ const actions = {
         console.log("ERROR: ", response)
       })
   },
-  async visiblePreviews({dispatch, commit, state, getters, rootState}, courseId) {
+  async visiblePreviews({dispatch, commit, state, getters, rootState}, courseId = "all") {
     if (!state.coursesLoaded) await dispatch('registeredCourses')
 
-    const localLectures = state.registeredCourses[courseId].lectures
-    const localLectureMap = new Map()
+    if (courseId !== "all") {
+      const localLectures = state.registeredCourses[courseId].lectures
+      const localLectureMap = new Map()
 
-    Object.keys(localLectures).forEach(key => {
-      localLectureMap.set(key, localLectures[key])
-    })
-    const localLectureList = Array.from(localLectureMap.values())
+      Object.keys(localLectures).forEach(key => {
+        localLectureMap.set(key, localLectures[key])
+      })
+      const localLectureList = Array.from(localLectureMap.values())
 
-    // const lectures = response.data.lectures
-    localLectureList.forEach(lecture => {
-      lecture.name = lecture.lectureName
-      delete lecture.lectureName
-      if (!lecture.previewImageUrl) lecture.previewImageUrl = state.defaultPreviewImageUrl
-    })
-    console.log('Fetched ' + localLectureList.length + ' lectures: ', localLectureList)
-    commit('visiblePreviews', localLectureList)
+      // const lectures = response.data.lectures
+      localLectureList.forEach(lecture => {
+        lecture.name = lecture.lectureName
+        delete lecture.lectureName
+        if (!lecture.previewImageUrl) lecture.previewImageUrl = state.defaultPreviewImageUrl
+      })
+      console.log('Fetched ' + localLectureList.length + ' lectures: ', localLectureList)
+      commit('visiblePreviews', localLectureList)
+    }
   }
 }
 

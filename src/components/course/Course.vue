@@ -36,11 +36,11 @@
     },
     watch: {
       activeCourse(courseId) {
-        this.updateLectures(courseId)
+        this.$store.dispatch('visiblePreviews', courseId)
       },
     },
     mounted() {
-      this.updateLectures(this.courseId)
+      this.$store.dispatch('visiblePreviews', courseId)
       this.updateActiveCourse()
     },
     beforeRouteEnter(to, from, next) {
