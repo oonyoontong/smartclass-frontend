@@ -4,8 +4,18 @@
       <span>Lecture ID: {{lectureId}}</span>
       <div id="quiz-btn-group" class="btn-group">
         <button class="btn btn-primary" id="quiz-button">Go to Quiz</button>
+
+        <button
+          type="button"
+          class="btn"
+          @click="showModal"
+        >
+          Feedback
+        </button>
+        <lecture-feedback></lecture-feedback>
       </div>
     </div>
+
     <div id="lecture-content">
       <pdf-view :lecture-url='"https://bitcoin.org/bitcoin.pdf"'></pdf-view>
     </div>
@@ -15,11 +25,19 @@
 <script>
   import { mapGetters } from 'vuex'
   import PdfView from './PdfView'
+  import LectureFeedback from "./LectureFeedback"
 
   export default {
     name: "lecture",
+    data(){
+      return {
+        isModalVisible: false
+      }
+    },
+
     components: {
-      PdfView
+      PdfView,
+      LectureFeedback
     },
     props: [
       'courseId',
@@ -46,7 +64,12 @@
     methods: {
       getQuizzes(){
         this.$store.dispatch('quizzes', {courseId: this.courseId, lectureId: this.lectureId})
-      }
+      },showModal() {
+      this.$modal.show('lecture-feedback');
+    },
+    closeModal() {
+      this.$modal.hide('lecture-feedback');
+    }
     }
   }
 </script>
