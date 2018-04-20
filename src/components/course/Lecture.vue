@@ -3,13 +3,11 @@
     <div id="lecture-header">
       <span>Lecture ID: {{lectureId}}</span>
       <div id="quiz-btn-group" class="btn-group">
-        <button class="btn btn-primary" id="quiz-button">Go to Quiz</button>
+        <router-link :to='lectureId + "/5ad90a35966ffa0014a2a5dd"'>
+          <span class="btn btn-primary" id="quiz-button">Go to Quiz</span>
+        </router-link>
 
-        <button
-          type="button"
-          class="btn"
-          @click="showModal"
-        >
+        <button type="button" class="btn" @click="showModal">
           Feedback
         </button>
         <lecture-feedback></lecture-feedback>

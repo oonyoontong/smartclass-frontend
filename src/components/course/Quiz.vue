@@ -1,18 +1,15 @@
 <template>
   <div class="quiz-wrapper">
-    <h3 v-if="quizId">
-      Quiz for Lecture "{{lectureId}}"
-    </h3>
     <div class="question-container" v-if="quizLoaded">
-      <span>{{question.questionName}}</span>
-      <div class="question-options">
-        <div class="question-container" v-for="(choice, index) in question.choices">
-          <input type="radio" >{{choice}}
-        </div>
-      </div>
-      <span class="btn btn-warning" v-if="questionNumber > 1" v-on:click="previousQuestion()">Previous Question</span>
-      <span class="btn btn-primary" v-if="questionNumber !== numQuestions" v-on:click="nextQuestion()">Next Question</span>
-      <span class="btn btn-success" v-else v-on:click="">Submit Quiz</span>
+      <h4>{{question.questionName}}</h4>
+      <form class="question-options">
+        <label class="question-container" v-for="(choice, index) in question.choices">
+          <input type="radio" name="option" :value="index" v-model="picked">{{choice}}
+        </label>
+        <span class="btn btn-warning" v-if="questionNumber > 1" v-on:click="previousQuestion()">Previous Question</span>
+        <span class="btn btn-primary" v-if="questionNumber !== numQuestions" v-on:click="nextQuestion()">Next Question</span>
+        <span class="btn btn-success" v-else v-on:click="">Submit Quiz</span>
+      </form>
     </div>
   </div>
 </template>
@@ -24,7 +21,8 @@
     name: "quiz-view",
     data() {
       return {
-        questionNumber: 1
+        questionNumber: 1,
+        response: null
       }
     },
     props: [
@@ -75,6 +73,9 @@
             this.questionNumber -= 1
           }
         }
+      },
+      submitQuiz() {
+
       }
     }
   }
@@ -83,5 +84,9 @@
 <style scoped lang="scss">
   .question-options {
     list-style-type: none;
+  }
+  form{
+    display: flex;
+    flex-direction: column;
   }
 </style>
