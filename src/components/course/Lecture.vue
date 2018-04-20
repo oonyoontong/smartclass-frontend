@@ -17,7 +17,7 @@
     </div>
 
     <div id="lecture-content">
-      <pdf-view :lecture-url='"https://bitcoin.org/bitcoin.pdf"'></pdf-view>
+      <pdf-view :lecture-url='"https://bitcoin.org/bitcoin.pdf"'/>
     </div>
   </div>
 </template>

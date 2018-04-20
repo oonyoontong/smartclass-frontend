@@ -55,13 +55,9 @@ export default new Router({
           }
         },
         {
-          path: '/courses/:courseId/lecture/:lectureId/quiz/:quiz',
-          components: {
-            default: Quiz
-          },
-          props: {
-            default: true
-          }
+          path: '/courses/:courseId/lecture/:lectureId/:quizId',
+          component: Quiz,
+          props: true
         },
         {
           path: '/courses/:courseId/lecture/:lectureId/feedback',

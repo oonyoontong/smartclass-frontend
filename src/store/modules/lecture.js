@@ -7,6 +7,7 @@ const state = {
 
 const getters = {
   quiz: state => {
+    console.log("QUIZ", state.quizzes)
     if (state.quizzes[0]) {
       return state.quizzes[0]
     }
@@ -20,7 +21,7 @@ const mutations = {
   activeLecture: (state, payload) => {
     state.activeLecture = payload
   },
-  quizzes: (state, payload) => {
+  quizzes: ({state}, payload) => {
     if (payload) {
       state.quizzes = payload
     }

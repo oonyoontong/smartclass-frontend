@@ -2,22 +2,15 @@ import axios from 'axios';
 
 const state = {
   quizContent: {},
-  activeQuiz: null
+  quizLoaded: false
 }
 
 const getters = {
-  questionNumber(state) {
-      return function(number) {
-        if(number > 0){
-          return state.quizContent.questions[number-1]
-        }
-        else{
-          console.log("INVALID QUESTION NUMBER, MUST BE >0")
-        }
-      }
+  questions(state) {
+    return state.quizContent.questions
   },
-  question(state) {
-    return state.quizContent.question
+  quizLoaded(state) {
+    return state.quizLoaded
   }
 }
 
@@ -25,17 +18,19 @@ const mutations = {
   quizContent(state, quizContent) {
     state.quizContent = quizContent
   },
-  activeQuiz(state, payload) {
-    state.activeQuiz = payload
+  quizLoaded(state, isLoaded) {
+    state.quizLoaded = isLoaded
   }
 }
 
 const actions = {
   async quizContent({commit, state, rootState}, quizId) {
     console.log("Getting Quiz:", quizId)
-    return axios.post(rootState.backendUrl + 'quiz', {quiz: quizId})
+    return axios.post(rootState.backendUrl + 'quiz', {quizId: quizId})
       .then(response => {
+        response.data['numQuestions'] = response.data.questions.length
         commit('quizContent', response.data)
+        commit('quizLoaded', true)
       })
       .catch(error => {
         console.log(error)
