@@ -4,11 +4,11 @@
       <h4>{{question.questionName}}</h4>
       <form class="question-options">
         <label class="question-container" v-for="(choice, index) in question.choices">
-          <input type="radio" name="option" :value="index" v-model="picked">{{choice}}
+          <input type="radio" name="option" :value="index" v-model="response">{{choice}}
         </label>
         <span class="btn btn-warning" v-if="questionNumber > 1" v-on:click="previousQuestion()">Previous Question</span>
         <span class="btn btn-primary" v-if="questionNumber !== numQuestions" v-on:click="nextQuestion()">Next Question</span>
-        <span class="btn btn-success" v-else v-on:click="">Submit Quiz</span>
+        <span class="btn btn-success" v-else v-on:click="submitQuiz()">Submit Quiz</span>
       </form>
     </div>
   </div>
@@ -60,22 +60,39 @@
     methods: {
       updateQuestions() {
       },
+      saveQuestion() {
+        if(this.response !== null){
+          this.$store.dispatch('saveQuestion', {
+            questionNumber: this.questionNumber,
+            questionId: this.question._id,
+            response: this.response
+          })
+        }
+      },
       nextQuestion() {
         if (this.quizLoaded) {
           if (this.questionNumber < this.numQuestions) {
+            this.saveQuestion()
             this.questionNumber += 1
+            this.clearResponse()
           }
         }
       },
       previousQuestion() {
         if (this.quizLoaded) {
           if (this.questionNumber > 1) {
+            this.saveQuestion()
             this.questionNumber -= 1
+            this.clearResponse()
           }
         }
       },
+      clearResponse() {
+        this.response = null
+      },
       submitQuiz() {
-
+        this.saveQuestion()
+        this.$store.dispatch('submitQuiz')
       }
     }
   }

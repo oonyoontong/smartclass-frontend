@@ -25,7 +25,7 @@ const mutations = {
     if (payload) {
       state.quizzes = payload
     }
-  }
+  },
 }
 
 const actions = {

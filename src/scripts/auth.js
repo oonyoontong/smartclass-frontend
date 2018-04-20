@@ -12,7 +12,6 @@ export default {
         delete res.account.passwordSalt;
         delete res.account._v;
         store.state.account = res.account;
-        console.log(store.state.account);
         localStorage.token = res.account._id;
         localStorage.privilege = res.account.privilege;
         if (cb) cb(true)

@@ -6,7 +6,7 @@
           <item-preview :previewInfo=preview />
         </li>
       </ul>
-      <h1>Course id: {{courseId}}</h1>
+      <!--<h1>Course id: {{courseId}}</h1>-->
     </div>
   </div>
 </template>
@@ -41,7 +41,6 @@
       }
     },
     created() {
-      console.log(this.courseId)
       this.$store.dispatch('visiblePreviews', this.courseId)
     },
     beforeRouteEnter(to, from, next) {

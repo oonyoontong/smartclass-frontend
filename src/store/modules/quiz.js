@@ -20,6 +20,10 @@ const mutations = {
   },
   quizLoaded(state, isLoaded) {
     state.quizLoaded = isLoaded
+  },
+  saveQuestion(state, {questionNumber, response}) {
+    state.quizContent.questions[questionNumber - 1].response = response
+    console.log("QUESTION SAVED", state.quizContent)
   }
 }
 
@@ -37,7 +41,23 @@ const actions = {
       })
   },
   submitQuiz({commit, state, rootState}) {
-
+  },
+  saveQuestion({state, rootState, commit}, {questionNumber, response, questionId}) {
+    commit('saveQuestion', {questionNumber, response})
+    const studentId = localStorage.token
+    console.log("STUDENTID:", studentId)
+    console.log("RESPONSE:", response)
+    return axios.put(rootState.backendUrl + 'question/update', {
+      questionId,
+      response,
+      studentId: studentId
+    })
+      .then(response => {
+        console.log(response)
+      })
+      .catch(error => {
+        console.log(error)
+      })
   }
 }
 
